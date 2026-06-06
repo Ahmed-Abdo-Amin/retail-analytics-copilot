@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Retail Analytics Copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+/* ── Reset & Root ─────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0c0f;
+  --surface:#111418;
+  --surface2:#181c22;
+  --surface3:#1e232b;
+  --border:#252b35;
+  --border2:#2e3540;
+  --accent:#00e5a0;
+  --accent2:#00b87d;
+  --accent-dim:rgba(0,229,160,.12);
+  --accent-dim2:rgba(0,229,160,.06);
+  --warn:#f5a623;
+  --warn-dim:rgba(245,166,35,.12);
+  --err:#ff4d6d;
+  --err-dim:rgba(255,77,109,.12);
+  --info:#4da6ff;
+  --info-dim:rgba(77,166,255,.1);
+  --text:#e2e8f0;
+  --text2:#94a3b8;
+  --text3:#64748b;
+  --mono:'DM Mono',monospace;
+  --sans:'Syne',sans-serif;
+  --r:8px;
+  --r2:12px;
+  --shadow:0 4px 24px rgba(0,0,0,.5);
+}
+html{height:100%;scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--mono);font-size:13px;line-height:1.6;
+  min-height:100vh;overflow-x:hidden;
+}
+
+/* ── Noise texture overlay ────────────────────────────────────── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
+  opacity:.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+}
+
+/* ── Grid layout ─────────────────────────────────────────────── */
+.app{display:grid;grid-template-rows:56px 1fr;min-height:100vh}
+
+/* ── Header ──────────────────────────────────────────────────── */
+header{
+  display:flex;align-items:center;gap:16px;
+  padding:0 24px;
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;
+}
+.logo{
+  font-family:var(--sans);font-weight:800;font-size:16px;
+  color:var(--accent);letter-spacing:-.02em;white-space:nowrap;
+}
+.logo span{color:var(--text3);font-weight:400}
+.status-pill{
+  display:flex;align-items:center;gap:6px;
+  padding:3px 10px;border-radius:99px;font-size:11px;
+  background:var(--surface3);border:1px solid var(--border2);
+  color:var(--text2);
+}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0}
+.dot.ok{background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.dot.err{background:var(--err)}
+.dot.pulse{animation:pulse 1.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+nav{display:flex;gap:2px;margin-left:auto}
+nav button{
+  background:none;border:none;cursor:pointer;
+  padding:6px 14px;border-radius:var(--r);
+  font-family:var(--mono);font-size:12px;color:var(--text2);
+  transition:all .15s;
+}
+nav button:hover{background:var(--surface3);color:var(--text)}
+nav button.active{background:var(--accent-dim);color:var(--accent)}
+
+/* ── Main ────────────────────────────────────────────────────── */
+main{display:grid;grid-template-columns:280px 1fr;overflow:hidden;height:calc(100vh - 56px)}
+
+/* ── Sidebar ─────────────────────────────────────────────────── */
+.sidebar{
+  background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.sidebar-header{
+  padding:16px;border-bottom:1px solid var(--border);
+  font-family:var(--sans);font-weight:600;font-size:11px;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--text3);
+}
+.qs-list{overflow-y:auto;flex:1;padding:8px}
+.qs-list::-webkit-scrollbar{width:4px}
+.qs-list::-webkit-scrollbar-track{background:transparent}
+.qs-list::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.q-item{
+  padding:10px 12px;border-radius:var(--r);cursor:pointer;
+  margin-bottom:4px;border:1px solid transparent;
+  transition:all .15s;
+}
+.q-item:hover{background:var(--surface3);border-color:var(--border2)}
+.q-item.active{background:var(--accent-dim);border-color:var(--accent);border-opacity:.3}
+.q-item-id{font-size:10px;color:var(--text3);margin-bottom:4px}
+.q-item-text{font-size:12px;color:var(--text2);line-height:1.4}
+.q-item.active .q-item-text{color:var(--text)}
+.q-badge{
+  display:inline-block;margin-top:6px;padding:2px 7px;border-radius:99px;
+  font-size:10px;background:var(--surface3);color:var(--text3);
+  border:1px solid var(--border2);
+}
+.q-badge.rag{background:var(--info-dim);color:var(--info);border-color:rgba(77,166,255,.25)}
+.q-badge.sql{background:var(--warn-dim);color:var(--warn);border-color:rgba(245,166,35,.25)}
+.q-badge.hybrid{background:var(--accent-dim);color:var(--accent);border-color:rgba(0,229,160,.25)}
+.run-all-btn{
+  margin:12px;padding:10px;border-radius:var(--r);
+  background:var(--accent-dim2);border:1px solid rgba(0,229,160,.2);
+  color:var(--accent);font-family:var(--mono);font-size:12px;
+  cursor:pointer;transition:all .2s;
+}
+.run-all-btn:hover{background:var(--accent-dim);border-color:var(--accent)}
+.run-all-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* ── Content area ────────────────────────────────────────────── */
+.content{display:flex;flex-direction:column;overflow:hidden}
+.tab-panels{flex:1;overflow:hidden;position:relative}
+.panel{position:absolute;inset:0;overflow-y:auto;display:none;padding:24px}
+.panel.active{display:block}
+.panel::-webkit-scrollbar{width:5px}
+.panel::-webkit-scrollbar-track{background:transparent}
+.panel::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* ── Query panel ─────────────────────────────────────────────── */
+.query-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);padding:20px;margin-bottom:20px;
+}
+.query-label{
+  font-family:var(--sans);font-size:11px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--text3);
+  margin-bottom:10px;
+}
+.query-input{
+  width:100%;background:var(--surface2);border:1px solid var(--border2);
+  border-radius:var(--r);padding:12px 14px;
+  font-family:var(--mono);font-size:13px;color:var(--text);
+  resize:vertical;min-height:72px;outline:none;
+  transition:border-color .15s;
+}
+.query-input:focus{border-color:var(--accent)}
+.query-row{display:flex;gap:12px;margin-top:12px;align-items:center}
+.fmt-select{
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:var(--r);padding:8px 12px;
+  font-family:var(--mono);font-size:12px;color:var(--text);outline:none;
+  cursor:pointer;
+}
+.fmt-select:focus{border-color:var(--accent)}
+.send-btn{
+  padding:8px 20px;border-radius:var(--r);
+  background:var(--accent);border:none;
+  font-family:var(--sans);font-weight:700;font-size:13px;color:#000;
+  cursor:pointer;transition:all .2s;margin-left:auto;
+  display:flex;align-items:center;gap:8px;
+}
+.send-btn:hover{background:var(--accent2);transform:translateY(-1px)}
+.send-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.send-btn .spin{display:none;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .7s linear infinite}
+.send-btn.loading .spin{display:block}
+.send-btn.loading .btn-text{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── Result card ─────────────────────────────────────────────── */
+.result-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);overflow:hidden;animation:slideUp .25s ease;
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.result-header{
+  display:flex;align-items:center;gap:12px;padding:14px 18px;
+  border-bottom:1px solid var(--border);background:var(--surface2);
+}
+.result-id{font-family:var(--sans);font-weight:700;font-size:13px}
+.result-route{padding:2px 8px;border-radius:99px;font-size:10px}
+.result-conf{margin-left:auto;font-size:12px;color:var(--text2)}
+.conf-bar{
+  display:inline-block;width:60px;height:4px;background:var(--surface3);
+  border-radius:2px;margin-left:8px;vertical-align:middle;overflow:hidden;
+}
+.conf-fill{height:100%;border-radius:2px;background:var(--accent);transition:width .5s ease}
+.result-body{padding:18px}
+.r-section{margin-bottom:18px}
+.r-section:last-child{margin-bottom:0}
+.r-label{
+  font-size:10px;text-transform:uppercase;letter-spacing:.12em;
+  color:var(--text3);margin-bottom:8px;
+}
+.answer-block{
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:var(--r);padding:14px;
+  font-family:var(--mono);font-size:13px;color:var(--accent);
+  word-break:break-all;
+}
+.sql-block{
+  background:#0d1117;border:1px solid var(--border2);
+  border-radius:var(--r);padding:14px;
+  font-family:var(--mono);font-size:12px;color:#7ee787;
+  white-space:pre-wrap;word-break:break-all;overflow-x:auto;
+}
+.expl-text{color:var(--text2);font-size:13px;line-height:1.6}
+.citations{display:flex;flex-wrap:wrap;gap:6px}
+.cite-tag{
+  padding:3px 9px;border-radius:99px;font-size:11px;
+  background:var(--surface3);border:1px solid var(--border2);color:var(--text2);
+}
+.cite-tag.doc{background:var(--info-dim);color:var(--info);border-color:rgba(77,166,255,.25)}
+.cite-tag.db{background:var(--warn-dim);color:var(--warn);border-color:rgba(245,166,35,.25)}
+.repair-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 9px;border-radius:99px;font-size:11px;
+  background:var(--err-dim);color:var(--err);border:1px solid rgba(255,77,109,.25);
+}
+
+/* ── Batch panel ─────────────────────────────────────────────── */
+.batch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:16px}
+.batch-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);overflow:hidden;
+  transition:border-color .15s;
+}
+.batch-card:hover{border-color:var(--border2)}
+.batch-card-head{
+  display:flex;align-items:center;gap:8px;padding:12px 14px;
+  border-bottom:1px solid var(--border);background:var(--surface2);
+}
+.batch-card-id{font-size:11px;font-weight:500;flex:1;color:var(--text2)}
+.batch-card-body{padding:14px}
+.batch-answer{
+  font-size:13px;color:var(--accent);font-family:var(--mono);
+  margin-bottom:10px;word-break:break-all;
+}
+.mini-conf{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text3)}
+.mini-bar{flex:1;height:3px;background:var(--surface3);border-radius:2px;overflow:hidden}
+.mini-fill{height:100%;background:var(--accent);border-radius:2px}
+
+/* ── Schema panel ────────────────────────────────────────────── */
+.schema-grid{display:grid;gap:12px}
+.table-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);overflow:hidden;
+}
+.table-name{
+  padding:10px 16px;font-family:var(--sans);font-weight:700;font-size:13px;
+  background:var(--surface2);border-bottom:1px solid var(--border);
+  cursor:pointer;display:flex;align-items:center;justify-content:space-between;
+}
+.table-name .arrow{transition:transform .2s;color:var(--text3)}
+.table-card.open .arrow{transform:rotate(90deg)}
+.col-table{display:none;width:100%;border-collapse:collapse}
+.table-card.open .col-table{display:table}
+.col-table th{
+  padding:7px 16px;text-align:left;font-size:10px;
+  text-transform:uppercase;letter-spacing:.1em;color:var(--text3);
+  background:var(--surface3);border-bottom:1px solid var(--border);
+}
+.col-table td{
+  padding:7px 16px;font-size:12px;border-bottom:1px solid var(--border);
+  color:var(--text2);
+}
+.col-table tr:last-child td{border-bottom:none}
+.type-badge{
+  padding:1px 6px;border-radius:4px;font-size:10px;
+  background:var(--surface3);color:var(--text3);
+}
+.pk-badge{
+  padding:1px 6px;border-radius:4px;font-size:10px;
+  background:var(--warn-dim);color:var(--warn);margin-left:4px;
+}
+
+/* ── Docs panel ──────────────────────────────────────────────── */
+.doc-filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.doc-filter{
+  padding:5px 12px;border-radius:99px;font-size:11px;cursor:pointer;
+  background:var(--surface);border:1px solid var(--border2);color:var(--text2);
+  transition:all .15s;
+}
+.doc-filter:hover{border-color:var(--accent);color:var(--accent)}
+.doc-filter.active{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
+.chunk-grid{display:grid;gap:10px}
+.chunk-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);padding:14px;
+  transition:border-color .15s;
+}
+.chunk-card:hover{border-color:var(--border2)}
+.chunk-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.chunk-id{font-size:11px;color:var(--accent);font-family:var(--mono)}
+.chunk-text{font-size:12px;color:var(--text2);line-height:1.6;white-space:pre-line}
+
+/* ── SQL panel ───────────────────────────────────────────────── */
+.sql-editor-wrap{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);padding:20px;margin-bottom:20px;
+}
+.sql-textarea{
+  width:100%;min-height:120px;background:#0d1117;
+  border:1px solid var(--border2);border-radius:var(--r);
+  padding:14px;font-family:var(--mono);font-size:13px;
+  color:#7ee787;resize:vertical;outline:none;
+  transition:border-color .15s;caret-color:#7ee787;
+}
+.sql-textarea:focus{border-color:var(--accent)}
+.sql-run-btn{
+  margin-top:12px;padding:8px 20px;border-radius:var(--r);
+  background:var(--warn-dim);border:1px solid var(--warn);
+  color:var(--warn);font-family:var(--mono);font-size:13px;
+  cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:8px;
+}
+.sql-run-btn:hover{background:rgba(245,166,35,.2)}
+.sql-run-btn:disabled{opacity:.4;cursor:not-allowed}
+.sql-results{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);overflow:hidden;
+}
+.sql-result-head{
+  padding:10px 16px;font-size:11px;color:var(--text2);
+  background:var(--surface2);border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;
+}
+.sql-table-wrap{overflow-x:auto;max-height:400px}
+table.sql-table{width:100%;border-collapse:collapse;font-size:12px}
+.sql-table th{
+  padding:8px 14px;text-align:left;
+  background:var(--surface3);color:var(--text2);
+  font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+  border-bottom:1px solid var(--border);white-space:nowrap;
+  position:sticky;top:0;
+}
+.sql-table td{
+  padding:7px 14px;border-bottom:1px solid var(--border);
+  color:var(--text);white-space:nowrap;
+}
+.sql-table tr:last-child td{border-bottom:none}
+.sql-table tr:hover td{background:var(--surface3)}
+
+/* ── Trace panel ─────────────────────────────────────────────── */
+.trace-wrap{display:flex;flex-direction:column;gap:2px}
+.trace-evt{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:8px 12px;border-radius:var(--r);
+  background:var(--surface);border:1px solid transparent;
+  transition:border-color .1s;font-size:12px;
+}
+.trace-evt:hover{border-color:var(--border2)}
+.trace-ts{color:var(--text3);font-size:10px;white-space:nowrap;padding-top:2px;min-width:85px}
+.trace-node{
+  padding:1px 7px;border-radius:4px;font-size:10px;font-weight:500;
+  white-space:nowrap;min-width:80px;text-align:center;
+}
+.trace-event{color:var(--text2);flex:1}
+.trace-data{color:var(--text3);font-size:11px;margin-top:2px;word-break:break-all}
+/* Node colours */
+.node-router{background:rgba(77,166,255,.15);color:#4da6ff}
+.node-retriever{background:rgba(180,120,255,.15);color:#b478ff}
+.node-planner{background:rgba(245,166,35,.12);color:#f5a623}
+.node-nl2sql{background:rgba(0,229,160,.12);color:#00e5a0}
+.node-sql_executor{background:rgba(0,229,160,.08);color:#00c489}
+.node-synthesizer{background:rgba(255,200,50,.1);color:#ffc832}
+.node-validator{background:rgba(255,77,109,.1);color:#ff4d6d}
+.node-repair{background:rgba(255,77,109,.2);color:#ff4d6d}
+.node-checkpoint{background:rgba(120,220,100,.12);color:#78dc64}
+
+/* ── Optimize panel ──────────────────────────────────────────── */
+.opt-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);padding:24px;max-width:600px;
+}
+.opt-title{
+  font-family:var(--sans);font-weight:700;font-size:18px;margin-bottom:6px;
+}
+.opt-desc{color:var(--text2);font-size:13px;margin-bottom:24px;line-height:1.6}
+.opt-run-btn{
+  padding:10px 24px;border-radius:var(--r);
+  background:var(--accent);border:none;
+  font-family:var(--sans);font-weight:700;font-size:14px;color:#000;
+  cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px;
+}
+.opt-run-btn:hover{background:var(--accent2)}
+.opt-run-btn:disabled{opacity:.4;cursor:not-allowed}
+.metrics-table{
+  margin-top:24px;background:var(--surface2);
+  border:1px solid var(--border2);border-radius:var(--r2);overflow:hidden;
+}
+.metrics-table table{width:100%;border-collapse:collapse;font-size:13px}
+.metrics-table th{
+  padding:10px 16px;text-align:left;background:var(--surface3);
+  color:var(--text2);font-size:11px;text-transform:uppercase;letter-spacing:.1em;
+  border-bottom:1px solid var(--border);
+}
+.metrics-table td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text)}
+.metrics-table tr:last-child td{border-bottom:none}
+.delta-pos{color:var(--accent)}
+.delta-neg{color:var(--err)}
+.delta-zero{color:var(--text3)}
+
+/* ── Outputs panel ───────────────────────────────────────────── */
+.outputs-grid{display:grid;gap:12px}
+
+/* ── Empty state ─────────────────────────────────────────────── */
+.empty{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:60px 20px;color:var(--text3);gap:12px;
+}
+.empty-icon{font-size:40px;opacity:.4}
+.empty-text{font-size:14px}
+
+/* ── Toast ───────────────────────────────────────────────────── */
+.toast{
+  position:fixed;bottom:24px;right:24px;z-index:9999;
+  padding:12px 18px;border-radius:var(--r);
+  background:var(--surface3);border:1px solid var(--border2);
+  font-size:13px;animation:toastIn .2s ease;
+  max-width:360px;box-shadow:var(--shadow);
+}
+.toast.ok{border-color:var(--accent);color:var(--accent)}
+.toast.err{border-color:var(--err);color:var(--err)}
+@keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* ── Section header ──────────────────────────────────────────── */
+.section-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;
+}
+.section-title{font-family:var(--sans);font-weight:700;font-size:16px}
+.section-count{
+  padding:3px 10px;border-radius:99px;font-size:11px;
+  background:var(--surface2);border:1px solid var(--border2);color:var(--text3);
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ── Header ─────────────────────────────────────────────────────────────── -->
+<header>
+  <div class="logo">Retail <span>Analytics</span> Copilot</div>
+  <div class="status-pill" id="statusPill">
+    <div class="dot pulse" id="statusDot"></div>
+    <span id="statusText">connecting…</span>
+  </div>
+  <nav>
+    <button class="active" onclick="switchTab('query')">Query</button>
+    <button onclick="switchTab('batch')">Batch</button>
+    <button onclick="switchTab('schema')">Schema</button>
+    <button onclick="switchTab('docs')">Docs</button>
+    <button onclick="switchTab('sql')">SQL</button>
+    <button onclick="switchTab('trace')">Trace</button>
+    <button onclick="switchTab('optimize')">Optimize</button>
+  </nav>
+</header>
+
+<!-- ── Main ───────────────────────────────────────────────────────────────── -->
+<main>
+
+  <!-- Sidebar: sample questions -->
+  <aside class="sidebar">
+    <div class="sidebar-header">Sample Questions</div>
+    <div class="qs-list" id="qsList">
+      <div class="empty"><div class="empty-icon">⏳</div><div class="empty-text">Loading…</div></div>
+    </div>
+    <button class="run-all-btn" id="runAllBtn" onclick="runBatch()" disabled>
+      ▶ Run All 6 Questions
+    </button>
+  </aside>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="tab-panels">
+
+      <!-- ── Query panel ─────────────────────────────────────────────────── -->
+      <div class="panel active" id="panel-query">
+        <div class="query-box">
+          <div class="query-label">Ask the Copilot</div>
+          <textarea class="query-input" id="queryInput"
+            placeholder="e.g. Top 3 products by total revenue all-time…"></textarea>
+          <div class="query-row">
+            <select class="fmt-select" id="fmtSelect">
+              <option value="str">format: str</option>
+              <option value="int">format: int</option>
+              <option value="float">format: float</option>
+              <option value="{category:str, quantity:int}">{category:str, quantity:int}</option>
+              <option value="{customer:str, margin:float}">{customer:str, margin:float}</option>
+              <option value="list[{product:str, revenue:float}]">list[{product:str, revenue:float}]</option>
+            </select>
+            <button class="send-btn" id="sendBtn" onclick="sendQuery()">
+              <div class="spin"></div>
+              <span class="btn-text">▶ Run</span>
+            </button>
+          </div>
+        </div>
+        <div id="queryResult"></div>
+      </div>
+
+      <!-- ── Batch panel ─────────────────────────────────────────────────── -->
+      <div class="panel" id="panel-batch">
+        <div class="section-hd">
+          <div class="section-title">Batch Results</div>
+          <span class="section-count" id="batchCount">—</span>
+        </div>
+        <div class="batch-grid" id="batchGrid">
+          <div class="empty"><div class="empty-icon">📊</div>
+          <div class="empty-text">Click "Run All 6 Questions" in the sidebar to start batch evaluation.</div></div>
+        </div>
+      </div>
+
+      <!-- ── Schema panel ────────────────────────────────────────────────── -->
+      <div class="panel" id="panel-schema">
+        <div class="section-hd">
+          <div class="section-title">Database Schema</div>
+          <span class="section-count" id="schemaCount">—</span>
+        </div>
+        <div class="schema-grid" id="schemaGrid">
+          <div class="empty"><div class="empty-icon">🗄️</div><div class="empty-text">Loading schema…</div></div>
+        </div>
+      </div>
+
+      <!-- ── Docs panel ──────────────────────────────────────────────────── -->
+      <div class="panel" id="panel-docs">
+        <div class="section-hd">
+          <div class="section-title">RAG Document Chunks</div>
+          <span class="section-count" id="docsCount">—</span>
+        </div>
+        <div class="doc-filters" id="docFilters"></div>
+        <div class="chunk-grid" id="chunkGrid">
+          <div class="empty"><div class="empty-icon">📄</div><div class="empty-text">Loading chunks…</div></div>
+        </div>
+      </div>
+
+      <!-- ── SQL panel ───────────────────────────────────────────────────── -->
+      <div class="panel" id="panel-sql">
+        <div class="sql-editor-wrap">
+          <div class="query-label">SQL Playground — Northwind SQLite</div>
+          <textarea class="sql-textarea" id="sqlInput" spellcheck="false"
+            placeholder='SELECT p.ProductName, SUM(od.Quantity) AS qty&#10;FROM "Order Details" od&#10;JOIN Products p ON od.ProductID = p.ProductID&#10;GROUP BY p.ProductName&#10;ORDER BY qty DESC LIMIT 10'></textarea>
+          <button class="sql-run-btn" id="sqlRunBtn" onclick="runSQL()">
+            <span>▶</span> Execute Query
+          </button>
+        </div>
+        <div class="sql-results" id="sqlResults" style="display:none"></div>
+      </div>
+
+      <!-- ── Trace panel ─────────────────────────────────────────────────── -->
+      <div class="panel" id="panel-trace">
+        <div class="section-hd">
+          <div class="section-title">Execution Trace</div>
+          <div style="display:flex;gap:8px">
+            <span class="section-count" id="traceCount">—</span>
+            <button onclick="loadTrace()" style="padding:4px 12px;border-radius:var(--r);background:var(--surface2);border:1px solid var(--border2);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;">↻ Refresh</button>
+          </div>
+        </div>
+        <div class="trace-wrap" id="traceWrap">
+          <div class="empty"><div class="empty-icon">🔍</div><div class="empty-text">Run a query to see the trace.</div></div>
+        </div>
+      </div>
+
+      <!-- ── Optimize panel ──────────────────────────────────────────────── -->
+      <div class="panel" id="panel-optimize">
+        <div class="opt-card">
+          <div class="opt-title">DSPy NL→SQL Optimization</div>
+          <div class="opt-desc">
+            Run <strong>BootstrapFewShot</strong> on the NL→SQL module over 10 hand-crafted
+            Northwind training examples. Measures SQL execution success rate before and after
+            optimization. Takes ~10–20 seconds.
+          </div>
+          <button class="opt-run-btn" id="optRunBtn" onclick="runOptimize()">
+            <span id="optBtnIcon">⚡</span>
+            <span id="optBtnText">Run Optimization</span>
+          </button>
+          <div class="metrics-table" id="metricsTable" style="display:none">
+            <table>
+              <thead><tr><th>Metric</th><th>Before</th><th>After</th><th>Delta</th></tr></thead>
+              <tbody id="metricsBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tab-panels -->
+  </div><!-- /content -->
+</main>
+</div><!-- /app -->
+
+<script>
+// ─── State ────────────────────────────────────────────────────────────────────
+const API = '';  // same origin — FastAPI serves frontend
+let _questions = [];
+let _activeQ = null;
+let _allChunks = [];
+let _chunkFilter = 'all';
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+async function init() {
+  pollHealth();
+  await loadQuestions();
+  loadSchema();
+  loadDocs();
+  loadTrace();
+  loadOutputs();
+}
+
+// ─── Health polling ───────────────────────────────────────────────────────────
+async function pollHealth() {
+  const dot = document.getElementById('statusDot');
+  const txt = document.getElementById('statusText');
+  try {
+    const r = await fetch(`${API}/api/health`);
+    const d = await r.json();
+    if (d.initialized) {
+      dot.className = 'dot ok';
+      txt.textContent = 'agent ready';
+      document.getElementById('runAllBtn').disabled = false;
+    } else if (d.error) {
+      dot.className = 'dot err';
+      txt.textContent = 'init error';
+    } else {
+      dot.className = 'dot pulse';
+      txt.textContent = 'initializing…';
+      setTimeout(pollHealth, 2000);
+    }
+  } catch {
+    dot.className = 'dot err';
+    txt.textContent = 'offline';
+    setTimeout(pollHealth, 3000);
+  }
+}
+
+// ─── Tab switching ────────────────────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(`panel-${name}`).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ─── Sidebar questions ────────────────────────────────────────────────────────
+async function loadQuestions() {
+  try {
+    const r = await fetch(`${API}/api/questions`);
+    const d = await r.json();
+    _questions = d.questions || [];
+    renderQuestions();
+  } catch { }
+}
+
+function inferRoute(q) {
+  const t = (q.question + q.format_hint).toLowerCase();
+  if (t.includes('policy') || t.includes('return window')) return 'rag';
+  if (t.includes('top 3') && t.includes('revenue') && !t.includes('kpi') && !t.includes('calendar')) return 'sql';
+  return 'hybrid';
+}
+
+function renderQuestions() {
+  const el = document.getElementById('qsList');
+  if (!_questions.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-text">No questions found.</div></div>';
+    return;
+  }
+  el.innerHTML = _questions.map((q, i) => {
+    const route = inferRoute(q);
+    return `<div class="q-item" id="qi-${i}" onclick="selectQuestion(${i})">
+      <div class="q-item-id">${q.id}</div>
+      <div class="q-item-text">${q.question.substring(0, 90)}${q.question.length > 90 ? '…' : ''}</div>
+      <div><span class="q-badge ${route}">${route}</span>
+      <span class="q-badge">${q.format_hint}</span></div>
+    </div>`;
+  }).join('');
+}
+
+function selectQuestion(i) {
+  _activeQ = _questions[i];
+  document.querySelectorAll('.q-item').forEach((el, j) => {
+    el.classList.toggle('active', j === i);
+  });
+  const inp = document.getElementById('queryInput');
+  const fmt = document.getElementById('fmtSelect');
+  inp.value = _activeQ.question;
+  // Set format hint in select
+  const opts = Array.from(fmt.options).map(o => o.value);
+  const match = opts.findIndex(o => o === _activeQ.format_hint);
+  fmt.selectedIndex = match >= 0 ? match : 0;
+  if (match < 0) {
+    const opt = document.createElement('option');
+    opt.value = _activeQ.format_hint;
+    opt.textContent = _activeQ.format_hint;
+    opt.selected = true;
+    fmt.appendChild(opt);
+  }
+  // Switch to query tab
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-query').classList.add('active');
+  document.querySelector('nav button').classList.add('active');
+}
+
+// ─── Single Query ─────────────────────────────────────────────────────────────
+async function sendQuery() {
+  const question = document.getElementById('queryInput').value.trim();
+  const format_hint = document.getElementById('fmtSelect').value;
+  if (!question) { toast('Enter a question first', 'err'); return; }
+
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true; btn.classList.add('loading');
+
+  try {
+    const r = await fetch(`${API}/api/query`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({question, format_hint, id: _activeQ?.id || 'custom'}),
+    });
+    const d = await r.json();
+    if (!r.ok) { toast(d.detail || 'Error', 'err'); return; }
+    renderResult(d);
+    loadTrace();
+  } catch (e) { toast(e.message, 'err'); }
+  finally { btn.disabled = false; btn.classList.remove('loading'); }
+}
+
+function renderResult(d) {
+  const route = d.route || 'hybrid';
+  const conf = Math.round((d.confidence || 0) * 100);
+  const ansStr = JSON.stringify(d.final_answer, null, 2);
+  const sqlStr = (d.sql || '').trim();
+  const cites = (d.citations || []).map(c => {
+    const isDoc = c.includes('::');
+    return `<span class="cite-tag ${isDoc ? 'doc' : 'db'}">${c}</span>`;
+  }).join('');
+  const repairBadge = d.repair_count > 0
+    ? `<span class="repair-badge">🔧 repaired ${d.repair_count}×</span>` : '';
+
+  document.getElementById('queryResult').innerHTML = `
+    <div class="result-card">
+      <div class="result-header">
+        <span class="result-id">${d.id}</span>
+        <span class="result-route q-badge ${route}">${route}</span>
+        ${repairBadge}
+        <span class="result-conf">
+          ${conf}%
+          <span class="conf-bar"><div class="conf-fill" style="width:${conf}%"></div></span>
+        </span>
+      </div>
+      <div class="result-body">
+        <div class="r-section">
+          <div class="r-label">Final Answer</div>
+          <div class="answer-block">${ansStr}</div>
+        </div>
+        ${sqlStr ? `<div class="r-section">
+          <div class="r-label">SQL Executed</div>
+          <div class="sql-block">${escHtml(sqlStr)}</div>
+        </div>` : ''}
+        ${d.explanation ? `<div class="r-section">
+          <div class="r-label">Explanation</div>
+          <div class="expl-text">${escHtml(d.explanation)}</div>
+        </div>` : ''}
+        ${cites ? `<div class="r-section">
+          <div class="r-label">Citations</div>
+          <div class="citations">${cites}</div>
+        </div>` : ''}
+      </div>
+    </div>`;
+}
+
+// ─── Batch ────────────────────────────────────────────────────────────────────
+async function runBatch() {
+  const btn = document.getElementById('runAllBtn');
+  btn.disabled = true; btn.textContent = '⏳ Running…';
+
+  try {
+    const r = await fetch(`${API}/api/batch`, {method: 'POST'});
+    const d = await r.json();
+    if (!r.ok) { toast(d.detail || 'Batch error', 'err'); return; }
+    renderBatch(d.results || []);
+    switchTabById('batch');
+    loadTrace();
+    toast(`Batch complete — ${d.count} results`, 'ok');
+  } catch (e) { toast(e.message, 'err'); }
+  finally { btn.disabled = false; btn.textContent = '▶ Run All 6 Questions'; }
+}
+
+function switchTabById(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach((b, i) => {
+    const tabs = ['query','batch','schema','docs','sql','trace','optimize'];
+    b.classList.toggle('active', tabs[i] === name);
+  });
+  document.getElementById(`panel-${name}`).classList.add('active');
+}
+
+async function loadOutputs() {
+  try {
+    const r = await fetch(`${API}/api/outputs`);
+    const d = await r.json();
+    if (d.outputs && d.outputs.length) renderBatch(d.outputs);
+  } catch { }
+}
+
+function renderBatch(results) {
+  document.getElementById('batchCount').textContent = `${results.length} results`;
+  const grid = document.getElementById('batchGrid');
+  if (!results.length) {
+    grid.innerHTML = '<div class="empty"><div class="empty-icon">📊</div><div class="empty-text">No results yet.</div></div>';
+    return;
+  }
+  grid.innerHTML = results.map(r => {
+    const conf = Math.round((r.confidence || 0) * 100);
+    const ans = JSON.stringify(r.final_answer);
+    const route = r.route || inferRoute({question: r.id, format_hint: ''});
+    return `<div class="batch-card">
+      <div class="batch-card-head">
+        <span class="batch-card-id">${r.id}</span>
+        <span class="q-badge ${route}">${route || '—'}</span>
+      </div>
+      <div class="batch-card-body">
+        <div class="batch-answer">${ans && ans !== 'null' ? ans.substring(0, 120) : '—'}</div>
+        <div class="mini-conf">
+          <span>${conf}% conf</span>
+          <div class="mini-bar"><div class="mini-fill" style="width:${conf}%"></div></div>
+          <span>${(r.citations || []).length} cites</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ─── Schema ───────────────────────────────────────────────────────────────────
+async function loadSchema() {
+  try {
+    const r = await fetch(`${API}/api/schema`);
+    const d = await r.json();
+    if (!d.tables) return;
+    document.getElementById('schemaCount').textContent = `${d.table_count} tables`;
+    const grid = document.getElementById('schemaGrid');
+    const important = ['Orders','Order Details','Products','Customers','Categories'];
+    const allTables = Object.keys(d.tables);
+    const sorted = [...important.filter(t => allTables.includes(t)), ...allTables.filter(t => !important.includes(t))];
+    grid.innerHTML = sorted.map((t, i) => {
+      const info = d.tables[t];
+      const cols = info.columns || [];
+      const rows = cols.map(c => `
+        <tr>
+          <td>${c.name}${c.pk ? '<span class="pk-badge">PK</span>' : ''}</td>
+          <td><span class="type-badge">${c.type || '—'}</span></td>
+          <td>${c.notnull ? '✓' : ''}</td>
+          <td>${c.dflt_value || ''}</td>
+        </tr>`).join('');
+      const open = i < 5 ? 'open' : '';
+      return `<div class="table-card ${open}" id="tc-${i}">
+        <div class="table-name" onclick="toggleTable(${i})">
+          <span>"${t}" <span style="color:var(--text3);font-size:11px;font-weight:400">(${cols.length} cols)</span></span>
+          <span class="arrow">▶</span>
+        </div>
+        <table class="col-table">
+          <thead><tr><th>Column</th><th>Type</th><th>NotNull</th><th>Default</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+    }).join('');
+  } catch { }
+}
+
+function toggleTable(i) {
+  document.getElementById(`tc-${i}`).classList.toggle('open');
+}
+
+// ─── Docs ─────────────────────────────────────────────────────────────────────
+async function loadDocs() {
+  try {
+    const r = await fetch(`${API}/api/docs`);
+    const d = await r.json();
+    _allChunks = d.chunks || [];
+    document.getElementById('docsCount').textContent = `${_allChunks.length} chunks`;
+    renderDocFilters();
+    renderChunks();
+  } catch { }
+}
+
+function renderDocFilters() {
+  const sources = ['all', ...new Set(_allChunks.map(c => c.source))];
+  document.getElementById('docFilters').innerHTML = sources.map(s =>
+    `<button class="doc-filter ${s === 'all' ? 'active' : ''}" onclick="filterDocs('${s}',this)">${s === 'all' ? 'All' : s.replace(/_/g,' ')}</button>`
+  ).join('');
+}
+
+function filterDocs(src, btn) {
+  _chunkFilter = src;
+  document.querySelectorAll('.doc-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderChunks();
+}
+
+function renderChunks() {
+  const chunks = _chunkFilter === 'all' ? _allChunks : _allChunks.filter(c => c.source === _chunkFilter);
+  const grid = document.getElementById('chunkGrid');
+  if (!chunks.length) {
+    grid.innerHTML = '<div class="empty"><div class="empty-icon">📄</div><div class="empty-text">No chunks.</div></div>';
+    return;
+  }
+  grid.innerHTML = chunks.map(c => `
+    <div class="chunk-card">
+      <div class="chunk-head">
+        <span class="chunk-id">${c.chunk_id}</span>
+        <span class="q-badge">${c.source.replace(/_/g,' ')}</span>
+      </div>
+      <div class="chunk-text">${escHtml(c.content)}</div>
+    </div>`).join('');
+}
+
+// ─── SQL Playground ───────────────────────────────────────────────────────────
+async function runSQL() {
+  const sql = document.getElementById('sqlInput').value.trim();
+  if (!sql) { toast('Enter a SQL query', 'err'); return; }
+  const btn = document.getElementById('sqlRunBtn');
+  btn.disabled = true;
+  try {
+    const r = await fetch(`${API}/api/sql`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({sql}),
+    });
+    const d = await r.json();
+    const el = document.getElementById('sqlResults');
+    el.style.display = 'block';
+    if (!r.ok || d.error) {
+      el.innerHTML = `<div class="sql-result-head" style="color:var(--err)">Error: ${escHtml(d.error || d.detail)}</div>`;
+      return;
+    }
+    const cols = d.columns || [];
+    const rows = d.rows || [];
+    const ths = cols.map(c => `<th>${escHtml(c)}</th>`).join('');
+    const trs = rows.map(row => `<tr>${row.map(v => `<td>${escHtml(String(v ?? ''))}</td>`).join('')}</tr>`).join('');
+    el.innerHTML = `
+      <div class="sql-result-head">
+        <span>${rows.length} rows returned</span>
+        <span style="color:var(--text3)">${cols.length} columns</span>
+      </div>
+      <div class="sql-table-wrap">
+        <table class="sql-table">
+          <thead><tr>${ths}</tr></thead>
+          <tbody>${trs}</tbody>
+        </table>
+      </div>`;
+  } catch (e) { toast(e.message, 'err'); }
+  finally { btn.disabled = false; }
+}
+
+// ─── Trace ────────────────────────────────────────────────────────────────────
+async function loadTrace() {
+  try {
+    const r = await fetch(`${API}/api/trace`);
+    const d = await r.json();
+    const events = d.events || [];
+    document.getElementById('traceCount').textContent = `${d.total} events`;
+    const wrap = document.getElementById('traceWrap');
+    if (!events.length) {
+      wrap.innerHTML = '<div class="empty"><div class="empty-icon">🔍</div><div class="empty-text">No trace events yet.</div></div>';
+      return;
+    }
+    wrap.innerHTML = [...events].reverse().map(e => {
+      const node = e.node || '';
+      const ts = (e.ts || '').split('T')[1]?.split('.')[0] || '';
+      const dataStr = Object.keys(e.data || {}).length
+        ? Object.entries(e.data).slice(0,4).map(([k,v]) => `${k}: ${JSON.stringify(v).substring(0,60)}`).join(' · ')
+        : '';
+      return `<div class="trace-evt">
+        <span class="trace-ts">${ts}</span>
+        <span class="trace-node node-${node}">${node}</span>
+        <div>
+          <div class="trace-event">${e.event || ''}</div>
+          ${dataStr ? `<div class="trace-data">${escHtml(dataStr)}</div>` : ''}
+        </div>
+      </div>`;
+    }).join('');
+  } catch { }
+}
+
+// ─── Optimize ─────────────────────────────────────────────────────────────────
+async function runOptimize() {
+  const btn = document.getElementById('optRunBtn');
+  const icon = document.getElementById('optBtnIcon');
+  const txt = document.getElementById('optBtnText');
+  btn.disabled = true; icon.textContent = '⏳'; txt.textContent = 'Running…';
+  try {
+    const r = await fetch(`${API}/api/optimize`);
+    const d = await r.json();
+    if (!r.ok) { toast(d.detail || 'Optimizer error', 'err'); return; }
+    const m = d.metrics || {};
+    document.getElementById('metricsTable').style.display = 'block';
+    const body = document.getElementById('metricsBody');
+    const pct = v => `${Math.round((v||0)*100)}%`;
+    const delta = m.delta || 0;
+    const dClass = delta > 0 ? 'delta-pos' : delta < 0 ? 'delta-neg' : 'delta-zero';
+    const dSign = delta > 0 ? '+' : '';
+    body.innerHTML = `
+      <tr><td>SQL Execution Success Rate</td><td>${pct(m.before_sql_success_rate)}</td><td>${pct(m.after_sql_success_rate)}</td><td class="${dClass}">${dSign}${pct(delta)}</td></tr>
+      <tr><td>Train Examples</td><td colspan="3">${m.train_size || 10}</td></tr>
+      <tr><td>Method</td><td colspan="3">${m.method || 'BootstrapFewShot'}</td></tr>`;
+    toast('Optimization complete', 'ok');
+  } catch (e) { toast(e.message, 'err'); }
+  finally { btn.disabled = false; icon.textContent = '⚡'; txt.textContent = 'Run Again'; }
+}
+
+// ─── Utils ────────────────────────────────────────────────────────────────────
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function toast(msg, type = 'ok') {
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3500);
+}
+
+// Enter to submit in query box
+document.getElementById('queryInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) sendQuery();
+});
+
+// ─── Boot ─────────────────────────────────────────────────────────────────────
+init();
+</script>
+</body>
+</html>
