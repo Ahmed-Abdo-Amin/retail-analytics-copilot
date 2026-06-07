@@ -1,16 +1,38 @@
 """
 main.py — Retail Analytics Copilot
 Startup checks, model validation, dependency verification, and DSPy configuration.
+
+Environment Variables:
+  LOCAL_MODELS=True   → يستخدم Ollama محلياً كما هو الكود الأصلي
+  LOCAL_MODELS=False  → يستخدم موديلات عبر Ngrok (Google Colab)
+                        ويقرأ NGROK_*_URL و NGROK_*_MODEL من .env
 """
 from __future__ import annotations
+import os
 import sys
 from pathlib import Path
 
+from dotenv import load_dotenv
 from utils.logging_utils import get_logger
+
+# ─── تحميل .env ───────────────────────────────────────────────────────────────
+load_dotenv()
 
 logger = get_logger("main")
 _PROJECT_ROOT = Path(__file__).parent
 
+
+def _get_local_models_flag() -> bool:
+    """
+    يقرأ LOCAL_MODELS من .env
+    True  = استخدام Ollama محلياً
+    False = استخدام Ngrok (Google Colab)
+    """
+    val = os.getenv("LOCAL_MODELS", "True").strip().lower()
+    return val not in ("false", "0", "no")
+
+
+# ─── Startup Checks ───────────────────────────────────────────────────────────
 
 def check_database() -> None:
     db_path = _PROJECT_ROOT / "data" / "northwind.sqlite"
@@ -47,6 +69,7 @@ def check_dependencies() -> None:
 
 
 def check_ollama() -> bool:
+    """فحص توفر Ollama محلياً."""
     try:
         import subprocess
         result = subprocess.run(["ollama", "list"], capture_output=True, text=True, timeout=5)
@@ -60,35 +83,125 @@ def check_ollama() -> bool:
         return False
 
 
-def setup_dspy(use_ollama: bool) -> None:
-    """Configure DSPy LM backend for DSPy 3.x."""
+# ─── DSPy Setup: Local (Ollama) ───────────────────────────────────────────────
+
+def setup_dspy_local(use_ollama: bool) -> None:
+    """
+    LOCAL_MODELS=True
+    يستخدم Ollama المحلي أو DummyLM كـ fallback.
+    هذا هو الوضع الأصلي للكود بدون أي تغيير.
+    """
     import dspy
+
+    ollama_model = os.getenv("OLLAMA_MODEL", "phi3.5:3.8b-mini-instruct-q4_K_M")
 
     if use_ollama:
         try:
             lm = dspy.LM(
-                model="ollama/phi3.5",
+                model=f"ollama/{ollama_model}",
                 max_tokens=512,
                 temperature=0.0,
                 cache=False,
             )
             dspy.configure(lm=lm)
-            logger.info("✓ DSPy configured with Ollama Phi-3.5")
+            logger.info(f"✓ DSPy configured with Ollama → {ollama_model}")
             return
         except Exception as exc:
             logger.warning(f"Ollama DSPy setup failed: {exc}")
 
-    # Fallback: DummyLM with pre-programmed answers
+    # Fallback: DummyLM
     _setup_dummy_lm()
 
+
+# ─── DSPy Setup: Remote (Ngrok) ───────────────────────────────────────────────
+
+def setup_dspy_ngrok() -> None:
+    """
+    LOCAL_MODELS=False
+    يستخدم موديلات Ollama تشتغل على Google Colab ومتاحة عبر Ngrok.
+    كل موديل (Router, NL2SQL, Synthesis, Planner) له URL ومودل منفصل.
+    يُضبط DSPy بـ default LM = موديل Synthesis (الأكثر استخداماً).
+    """
+    import dspy
+
+    # قراءة إعدادات كل موديل من .env
+    ngrok_configs = {
+        "router":    (os.getenv("NGROK_ROUTER_URL", ""),    os.getenv("NGROK_ROUTER_MODEL",    "phi3.5:3.8b-mini-instruct-q4_K_M")),
+        "nl2sql":    (os.getenv("NGROK_NL2SQL_URL", ""),    os.getenv("NGROK_NL2SQL_MODEL",    "gemma2:9b-instruct-q5_0")),
+        "synthesis": (os.getenv("NGROK_SYNTHESIS_URL", ""), os.getenv("NGROK_SYNTHESIS_MODEL", "gemma2:9b-instruct-q5_0")),
+        "planner":   (os.getenv("NGROK_PLANNER_URL", ""),   os.getenv("NGROK_PLANNER_MODEL",   "phi3.5:3.8b-mini-instruct-q4_K_M")),
+    }
+
+    # التحقق من توفر الروابط
+    missing_urls = [name for name, (url, _) in ngrok_configs.items() if not url or "your-" in url]
+    if missing_urls:
+        logger.warning(f"⚠ Ngrok URLs not set for: {missing_urls} — using DummyLM fallback")
+        _setup_dummy_lm()
+        return
+
+    # تخزين الإعدادات للاستخدام في dspy_modules
+    os.environ["_NGROK_CONFIGS_LOADED"] = "true"
+    for name, (url, model) in ngrok_configs.items():
+        os.environ[f"_NGROK_{name.upper()}_URL"] = url
+        os.environ[f"_NGROK_{name.upper()}_MODEL"] = model
+
+    # DSPy default LM = Synthesis (الأكثر استخداماً)
+    synthesis_url, synthesis_model = ngrok_configs["synthesis"]
+    try:
+        lm = dspy.LM(
+            model=f"openai/{synthesis_model}",
+            api_base=f"{synthesis_url.rstrip('/')}/v1",
+            api_key="ollama",  # Ollama لا يحتاج API key حقيقي
+            max_tokens=512,
+            temperature=0.0,
+            cache=False,
+        )
+        dspy.configure(lm=lm)
+        logger.info(f"✓ DSPy configured with Ngrok Synthesis → {synthesis_model} @ {synthesis_url}")
+    except Exception as exc:
+        logger.warning(f"Ngrok DSPy setup failed: {exc} — using DummyLM")
+        _setup_dummy_lm()
+
+
+def get_ngrok_lm(module_name: str):
+    """
+    يُعيد dspy.LM مُهيأ للموديل المطلوب عبر Ngrok.
+    module_name: router | nl2sql | synthesis | planner
+    يُستخدم من dspy_modules.py عند LOCAL_MODELS=False
+    """
+    import dspy
+
+    if os.getenv("_NGROK_CONFIGS_LOADED") != "true":
+        return None  # ارجع للـ default LM
+
+    key = module_name.upper()
+    url   = os.getenv(f"_NGROK_{key}_URL", "")
+    model = os.getenv(f"_NGROK_{key}_MODEL", "")
+
+    if not url or not model:
+        return None
+
+    try:
+        return dspy.LM(
+            model=f"openai/{model}",
+            api_base=f"{url.rstrip('/')}/v1",
+            api_key="ollama",
+            max_tokens=512,
+            temperature=0.0,
+            cache=False,
+        )
+    except Exception as exc:
+        logger.warning(f"Failed to create Ngrok LM for {module_name}: {exc}")
+        return None
+
+
+# ─── DummyLM Fallback ─────────────────────────────────────────────────────────
 
 def _setup_dummy_lm() -> None:
     """Configure DSPy 3.x DummyLM with rotating answer pool for all question types."""
     import dspy
     from dspy.utils import DummyLM
 
-    # DummyLM in DSPy 3.x takes a list of answer dicts (one per predict call)
-    # We provide a large pool that cycles through all expected answer shapes
     answers = [
         # Router answers
         {"route": "rag"},
@@ -117,27 +230,38 @@ def _setup_dummy_lm() -> None:
         {"final_answer": '{"customer": "QUICK", "margin": 0.0}', "explanation": "No 1997 margin data in this DB snapshot."},
     ]
 
-    # Use a large cycling pool
-    pool = answers * 20  # enough for any run
+    pool = answers * 20
     lm = DummyLM(answers=pool)
     dspy.configure(lm=lm)
     logger.info("✓ DSPy configured with DummyLM (deterministic fallback)")
 
 
+# ─── Main Initialize ──────────────────────────────────────────────────────────
+
 def initialize() -> dict:
-    """Full startup sequence."""
+    """Full startup sequence — يختار Backend بناءً على LOCAL_MODELS."""
     logger.info("=" * 60)
     logger.info("Retail Analytics Copilot — Startup")
     logger.info("=" * 60)
 
+    local_models = _get_local_models_flag()
+    logger.info(f"▶ Mode: {'LOCAL (Ollama)' if local_models else 'REMOTE (Ngrok / Google Colab)'}")
+
     check_dependencies()
     check_database()
     check_docs()
-    use_ollama = check_ollama()
-    setup_dspy(use_ollama)
+
+    if local_models:
+        # ─── الوضع الأصلي بالكامل بدون أي تغيير ───
+        use_ollama = check_ollama()
+        setup_dspy_local(use_ollama)
+    else:
+        # ─── الوضع الجديد: Ngrok ───
+        use_ollama = False
+        setup_dspy_ngrok()
 
     logger.info("=" * 60)
     logger.info("✓ Startup complete")
     logger.info("=" * 60)
 
-    return {"use_ollama": use_ollama}
+    return {"use_ollama": use_ollama, "local_models": local_models}

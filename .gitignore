@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+env/
+venv/
+.venv/
+env_win/
+
+# Environment files (keep example, hide real one)
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs / outputs
+logs/
+*.log
+
+# uploads & temp (runtime dirs)
+uploads/national_id/*
+uploads/passport/*
+!uploads/national_id/.gitkeep
+!uploads/passport/.gitkeep
+temp/
+
+# ML weights — الموديلات المحلية ترفع، الـ cache لا
+ml_weights/paddle/
+ml_weights/paddlex/
+ml_weights/easyocr/
+ml_weights/correctors/
+
+# OS
+Thumbs.db
+desktop.ini
+run.sh
+
+.env

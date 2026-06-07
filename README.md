@@ -133,9 +133,20 @@ Deterministic formula combining:
 cd retail-analytics-copilot
 ```
 
+### (Optional) Prettier shell prompt
+
+For a more readable command line during setup:
+
+```bash
+export PS1="\[\033[01;32m\]\u@\h:\w\n\[\033[00m\]\$ "
+```
+-----------------------------
+
 ### 2. Install dependencies
 
 ```bash
+python -m venv .venv && source .venv/bin/activate
+
 pip install -r requirements.txt
 ```
 
@@ -175,6 +186,8 @@ python run_agent_hybrid.py \
 ```
 
 ### Run a single question
+
+
 
 ```bash
 python run_agent_hybrid.py \

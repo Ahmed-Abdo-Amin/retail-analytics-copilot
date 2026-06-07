@@ -1,3 +1,4 @@
+import os
 """
 api_server.py — FastAPI REST server for the Retail Analytics Copilot.
 
@@ -135,6 +136,7 @@ def health():
     return {
         "status": "ok" if _INITIALIZED else ("error" if _INIT_ERROR else "initializing"),
         "initialized": _INITIALIZED,
+        "mode": "local" if os.getenv("LOCAL_MODELS", "True").strip().lower() not in ("false", "0", "no") else "remote_ngrok",
         "error": _INIT_ERROR,
     }
 
