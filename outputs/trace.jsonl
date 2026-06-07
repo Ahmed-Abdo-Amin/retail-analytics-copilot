@@ -106,3 +106,514 @@
 {"ts": "2026-06-07T13:09:48.218070Z", "question_id": "hybrid_best_customer_margin_1997", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
 {"ts": "2026-06-07T13:09:48.228333Z", "question_id": "hybrid_best_customer_margin_1997", "node": "checkpoint", "event": "start", "data": {}}
 {"ts": "2026-06-07T13:09:48.235036Z", "question_id": "hybrid_best_customer_margin_1997", "node": "checkpoint", "event": "done", "data": {"confidence": 0.6384}}
+{"ts": "2026-06-07T18:31:12.628162Z", "question_id": "rag_policy_beverages_return_days", "node": "router", "event": "start", "data": {"question": "According to the product policy, what is the return window (days) for unopened Beverages? Return an "}}
+{"ts": "2026-06-07T18:45:31.279666Z", "question_id": "rag_policy_beverages_return_days", "node": "router", "event": "start", "data": {"question": "According to the product policy, what is the return window (days) for unopened Beverages? Return an "}}
+{"ts": "2026-06-07T18:46:32.654651Z", "question_id": "rag_policy_beverages_return_days", "node": "router", "event": "done", "data": {"route": "rag"}}
+{"ts": "2026-06-07T18:46:32.687115Z", "question_id": "rag_policy_beverages_return_days", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:46:33.085152Z", "question_id": "rag_policy_beverages_return_days", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.2783019944728783}}
+{"ts": "2026-06-07T18:46:33.114408Z", "question_id": "rag_policy_beverages_return_days", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:46:42.130590Z", "question_id": "rag_policy_beverages_return_days", "node": "planner", "event": "done", "data": {"constraints": {"date_range": null, "kpi_formula": "", "categories": ["Beverages"], "entities": []}}}
+{"ts": "2026-06-07T18:46:42.154842Z", "question_id": "rag_policy_beverages_return_days", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:46:42.165939Z", "question_id": "rag_policy_beverages_return_days", "node": "synthesizer", "event": "done", "data": {"answer": "14"}}
+{"ts": "2026-06-07T18:46:42.177365Z", "question_id": "rag_policy_beverages_return_days", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:46:42.185669Z", "question_id": "rag_policy_beverages_return_days", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T18:46:42.196574Z", "question_id": "rag_policy_beverages_return_days", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:46:42.204352Z", "question_id": "rag_policy_beverages_return_days", "node": "checkpoint", "event": "done", "data": {"confidence": 0.4948}}
+{"ts": "2026-06-07T18:56:05.823712Z", "question_id": "__warmup__", "node": "router", "event": "start", "data": {"question": "What is the return policy for beverages?"}}
+{"ts": "2026-06-07T18:56:06.733318Z", "question_id": "hybrid_aov_winter_1997", "node": "router", "event": "start", "data": {"question": "Using the AOV definition from the KPI docs, what was the Average Order Value during 'Winter Classics"}}
+{"ts": "2026-06-07T18:56:46.748175Z", "question_id": "__warmup__", "node": "router", "event": "done", "data": {"route": "rag"}}
+{"ts": "2026-06-07T18:56:46.760980Z", "question_id": "__warmup__", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:56:46.784852Z", "question_id": "__warmup__", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.33073860466243404}}
+{"ts": "2026-06-07T18:56:46.802694Z", "question_id": "__warmup__", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:56:48.313541Z", "question_id": "hybrid_aov_winter_1997", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T18:56:48.346899Z", "question_id": "hybrid_aov_winter_1997", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:56:48.363874Z", "question_id": "hybrid_aov_winter_1997", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.3770255841878286}}
+{"ts": "2026-06-07T18:56:48.382703Z", "question_id": "hybrid_aov_winter_1997", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:57:04.127505Z", "question_id": "__warmup__", "node": "planner", "event": "done", "data": {"constraints": {"date_range": null, "kpi_formula": "", "categories": ["Beverages"], "entities": []}}}
+{"ts": "2026-06-07T18:57:04.156325Z", "question_id": "__warmup__", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:57:08.219579Z", "question_id": "hybrid_aov_winter_1997", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-12-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice*Quantity*(1-Discount)) / COUNT(DISTINCT OrderID)", "categories": ["Dairy Products", "Confections"], "entities": ["Winter Classics 1997"]}}}
+{"ts": "2026-06-07T18:57:08.228090Z", "question_id": "hybrid_aov_winter_1997", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:57:15.350836Z", "question_id": "__warmup__", "node": "synthesizer", "event": "done", "data": {"answer": "\"Return policy information for beverages is not available in the provided contex"}}
+{"ts": "2026-06-07T18:57:15.362540Z", "question_id": "__warmup__", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:57:15.371973Z", "question_id": "__warmup__", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T18:57:15.385658Z", "question_id": "__warmup__", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:57:15.395227Z", "question_id": "__warmup__", "node": "checkpoint", "event": "done", "data": {"confidence": 0.5315}}
+{"ts": "2026-06-07T18:57:28.767070Z", "question_id": "hybrid_aov_winter_1997", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT CAST(SUM(UnitPrice * Quantity * (1 - Discount)) AS REAL) / COUNT(DISTINCT OrderID) FROM \"Order Details\" WHERE OrderID IN (SELECT OrderID FROM \"Orders\" WHERE OrderDate BETWEEN '1997-12-01' AND '"}}
+{"ts": "2026-06-07T18:57:28.789185Z", "question_id": "hybrid_aov_winter_1997", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:57:31.394762Z", "question_id": "hybrid_aov_winter_1997", "node": "sql_executor", "event": "done", "data": {"n_rows": 1, "error": null}}
+{"ts": "2026-06-07T18:57:31.413869Z", "question_id": "hybrid_aov_winter_1997", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:57:31.430574Z", "question_id": "hybrid_aov_winter_1997", "node": "synthesizer", "event": "done", "data": {"answer": "27538.79"}}
+{"ts": "2026-06-07T18:57:31.456625Z", "question_id": "hybrid_aov_winter_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:57:31.472663Z", "question_id": "hybrid_aov_winter_1997", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T18:57:31.496444Z", "question_id": "hybrid_aov_winter_1997", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:57:31.512615Z", "question_id": "hybrid_aov_winter_1997", "node": "checkpoint", "event": "done", "data": {"confidence": 0.73}}
+{"ts": "2026-06-07T18:57:46.309834Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "start", "data": {"question": "Top 3 products by total revenue all-time. Revenue uses Order Details: SUM(UnitPrice*Quantity*(1-Disc"}}
+{"ts": "2026-06-07T18:57:53.784295Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T18:57:53.791886Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:57:53.804811Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "done", "data": {"n_chunks": 4, "avg_score": 0.3969571437949639}}
+{"ts": "2026-06-07T18:57:53.815672Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:58:08.564819Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-12-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice*Quantity*(1-Discount))", "categories": [], "entities": []}}}
+{"ts": "2026-06-07T18:58:08.577456Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:58:15.727287Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT ProductID, SUM(UnitPrice*Quantity*(1-Discount)) AS Revenue FROM \"Order Details\" GROUP BY ProductID ORDER BY Revenue DESC LIMIT 3;"}}
+{"ts": "2026-06-07T18:58:15.749871Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:58:16.600461Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "done", "data": {"n_rows": 3, "error": null}}
+{"ts": "2026-06-07T18:58:16.608781Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:58:16.617111Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "done", "data": {"answer": "[{'product': '38', 'revenue': 53265895.23}, {'product': '29', 'revenue': 2462346"}}
+{"ts": "2026-06-07T18:58:16.629387Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:58:16.637963Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T18:58:16.651238Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T18:58:16.660967Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "done", "data": {"confidence": 0.79}}
+{"ts": "2026-06-07T19:05:50.878703Z", "question_id": "__warmup__", "node": "router", "event": "start", "data": {"question": "What is the return policy for beverages?"}}
+{"ts": "2026-06-07T19:06:46.354541Z", "question_id": "__warmup__", "node": "router", "event": "done", "data": {"route": "rag"}}
+{"ts": "2026-06-07T19:06:46.378137Z", "question_id": "__warmup__", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:06:46.406077Z", "question_id": "__warmup__", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.33073860466243404}}
+{"ts": "2026-06-07T19:06:46.432103Z", "question_id": "__warmup__", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:06:57.177172Z", "question_id": "__warmup__", "node": "planner", "event": "done", "data": {"constraints": {"date_range": null, "kpi_formula": "", "categories": ["Beverages"], "entities": []}}}
+{"ts": "2026-06-07T19:06:57.187240Z", "question_id": "__warmup__", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:07:08.856298Z", "question_id": "__warmup__", "node": "synthesizer", "event": "done", "data": {"answer": "\"Return policy information for beverages is not available in the provided contex"}}
+{"ts": "2026-06-07T19:07:08.875595Z", "question_id": "__warmup__", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:07:08.891074Z", "question_id": "__warmup__", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:07:08.911630Z", "question_id": "__warmup__", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:07:08.927081Z", "question_id": "__warmup__", "node": "checkpoint", "event": "done", "data": {"confidence": 0.5315}}
+{"ts": "2026-06-07T19:07:35.731923Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "start", "data": {"question": "Top 3 products by total revenue all-time. Revenue uses Order Details: SUM(UnitPrice*Quantity*(1-Disc"}}
+{"ts": "2026-06-07T19:07:43.511554Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:07:43.524052Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:07:43.536839Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "done", "data": {"n_chunks": 4, "avg_score": 0.3969571437949639}}
+{"ts": "2026-06-07T19:07:43.550083Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:07:58.397510Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-12-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice*Quantity*(1-Discount))", "categories": [], "entities": []}}}
+{"ts": "2026-06-07T19:07:58.409853Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:08:11.866787Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT ProductID, SUM(UnitPrice*Quantity*(1-Discount)) AS Revenue FROM \"Order Details\" GROUP BY ProductID ORDER BY Revenue DESC LIMIT 3;"}}
+{"ts": "2026-06-07T19:08:11.887722Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:08:12.773357Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "done", "data": {"n_rows": 3, "error": null}}
+{"ts": "2026-06-07T19:08:12.786787Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:08:12.796752Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "done", "data": {"answer": "[{'product': '38', 'revenue': 53265895.23}, {'product': '29', 'revenue': 2462346"}}
+{"ts": "2026-06-07T19:08:12.809043Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:08:12.817926Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:08:12.831109Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:08:12.839343Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "done", "data": {"confidence": 0.79}}
+{"ts": "2026-06-07T19:08:23.133972Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "start", "data": {"question": "Top 3 products by total revenue all-time. Revenue uses Order Details: SUM(UnitPrice*Quantity*(1-Disc"}}
+{"ts": "2026-06-07T19:08:30.376701Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:08:30.405462Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:08:30.419674Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "done", "data": {"n_chunks": 4, "avg_score": 0.3969571437949639}}
+{"ts": "2026-06-07T19:08:30.435655Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:08:48.184332Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-12-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice*Quantity*(1-Discount))", "categories": [], "entities": []}}}
+{"ts": "2026-06-07T19:08:48.203859Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:08:53.865123Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT ProductID, SUM(UnitPrice*Quantity*(1-Discount)) AS Revenue FROM \"Order Details\" GROUP BY ProductID ORDER BY Revenue DESC LIMIT 3;"}}
+{"ts": "2026-06-07T19:08:53.887194Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:08:55.731919Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "done", "data": {"n_rows": 3, "error": null}}
+{"ts": "2026-06-07T19:08:55.744385Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:08:55.754047Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "done", "data": {"answer": "[{'product': '38', 'revenue': 53265895.23}, {'product': '29', 'revenue': 2462346"}}
+{"ts": "2026-06-07T19:08:55.768781Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:08:55.779690Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:08:55.795521Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:08:55.805670Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "done", "data": {"confidence": 0.79}}
+{"ts": "2026-06-07T19:18:36.306873Z", "question_id": "__warmup__", "node": "router", "event": "start", "data": {"question": "What is the return policy for beverages?"}}
+{"ts": "2026-06-07T19:18:37.071780Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "start", "data": {"question": "Top 3 products by total revenue all-time. Revenue uses Order Details: SUM(UnitPrice*Quantity*(1-Disc"}}
+{"ts": "2026-06-07T19:19:13.318305Z", "question_id": "__warmup__", "node": "router", "event": "done", "data": {"route": "rag"}}
+{"ts": "2026-06-07T19:19:13.330623Z", "question_id": "__warmup__", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:19:13.352980Z", "question_id": "__warmup__", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.33073860466243404}}
+{"ts": "2026-06-07T19:19:13.369237Z", "question_id": "__warmup__", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:19:17.630714Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:19:17.645488Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:19:17.658109Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "done", "data": {"n_chunks": 4, "avg_score": 0.3969571437949639}}
+{"ts": "2026-06-07T19:19:17.675404Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:19:31.179158Z", "question_id": "__warmup__", "node": "planner", "event": "done", "data": {"constraints": {"date_range": null, "kpi_formula": "", "categories": ["Beverages"], "entities": []}}}
+{"ts": "2026-06-07T19:19:31.197917Z", "question_id": "__warmup__", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:19:36.284926Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-12-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice*Quantity*(1-Discount))", "categories": [], "entities": []}}}
+{"ts": "2026-06-07T19:19:36.308221Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:19:41.096628Z", "question_id": "__warmup__", "node": "synthesizer", "event": "done", "data": {"answer": "\"Return policy information for beverages is not available in the provided contex"}}
+{"ts": "2026-06-07T19:19:41.110756Z", "question_id": "__warmup__", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:19:41.129734Z", "question_id": "__warmup__", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:19:41.152349Z", "question_id": "__warmup__", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:19:41.170073Z", "question_id": "__warmup__", "node": "checkpoint", "event": "done", "data": {"confidence": 0.5315}}
+{"ts": "2026-06-07T19:19:52.096111Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT ProductID, SUM(UnitPrice*Quantity*(1-Discount)) AS Revenue FROM \"Order Details\" GROUP BY ProductID ORDER BY Revenue DESC LIMIT 3;"}}
+{"ts": "2026-06-07T19:19:52.109051Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:19:53.015839Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "done", "data": {"n_rows": 3, "error": null}}
+{"ts": "2026-06-07T19:19:53.027985Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:19:53.038393Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "done", "data": {"answer": "[{'product': '38', 'revenue': 53265895.23}, {'product': '29', 'revenue': 2462346"}}
+{"ts": "2026-06-07T19:19:53.053804Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:19:53.063121Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:19:53.076021Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:19:53.089893Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "done", "data": {"confidence": 0.79}}
+{"ts": "2026-06-07T19:20:16.047773Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "start", "data": {"question": "Top 3 products by total revenue all-time. Revenue uses Order Details: SUM(UnitPrice*Quantity*(1-Disc"}}
+{"ts": "2026-06-07T19:20:23.025301Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:20:23.035990Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:20:23.047318Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "done", "data": {"n_chunks": 4, "avg_score": 0.3969571437949639}}
+{"ts": "2026-06-07T19:20:23.060318Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:20:40.106343Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-12-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice*Quantity*(1-Discount))", "categories": [], "entities": []}}}
+{"ts": "2026-06-07T19:20:40.116304Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:20:45.667355Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT ProductID, SUM(UnitPrice*Quantity*(1-Discount)) AS Revenue FROM \"Order Details\" GROUP BY ProductID ORDER BY Revenue DESC LIMIT 3;"}}
+{"ts": "2026-06-07T19:20:45.681910Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:20:47.283979Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "done", "data": {"n_rows": 3, "error": null}}
+{"ts": "2026-06-07T19:20:47.298177Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:20:47.308257Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "done", "data": {"answer": "[{'product': '38', 'revenue': 53265895.23}, {'product': '29', 'revenue': 2462346"}}
+{"ts": "2026-06-07T19:20:47.321528Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:20:47.331019Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:20:47.343702Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:20:47.352649Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "done", "data": {"confidence": 0.79}}
+{"ts": "2026-06-07T19:21:14.150518Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "router", "event": "start", "data": {"question": "Total revenue from the 'Beverages' category during 'Summer Beverages 1997' dates. Return a float rou"}}
+{"ts": "2026-06-07T19:21:19.244247Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:21:19.253607Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:21:19.266302Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.34907709213039534}}
+{"ts": "2026-06-07T19:21:19.279384Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:21:36.267510Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-06-01", "end": "1997-06-30"}, "kpi_formula": "", "categories": ["Beverages"], "entities": ["Summer Beverages 1997"]}}}
+{"ts": "2026-06-07T19:21:36.290665Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:21:46.644456Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT SUM(\"UnitPrice\" * \"Quantity\" * (1 - \"Discount\")) FROM \"Order Details\" WHERE \"OrderID\" IN (SELECT \"OrderID\" FROM \"Orders\" WHERE \"OrderDate\" BETWEEN '1997-06-01' AND '1997-06-30') AND \"ProductID\""}}
+{"ts": "2026-06-07T19:21:46.662714Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:21:47.577265Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "sql_executor", "event": "done", "data": {"n_rows": 1, "error": null}}
+{"ts": "2026-06-07T19:21:47.587376Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:21:47.596675Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "synthesizer", "event": "done", "data": {"answer": "92163184.18"}}
+{"ts": "2026-06-07T19:21:47.608816Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:21:47.618700Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:21:47.630146Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:21:47.640763Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "checkpoint", "event": "done", "data": {"confidence": 0.73}}
+{"ts": "2026-06-07T19:22:29.032960Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "router", "event": "start", "data": {"question": "Total revenue from the 'Beverages' category during 'Summer Beverages 1997' dates. Return a float rou"}}
+{"ts": "2026-06-07T19:22:34.300680Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:22:34.315903Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:22:34.328633Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.34907709213039534}}
+{"ts": "2026-06-07T19:22:34.343138Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:22:45.869480Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-06-01", "end": "1997-06-30"}, "kpi_formula": "", "categories": ["Beverages"], "entities": ["Summer Beverages 1997"]}}}
+{"ts": "2026-06-07T19:22:45.882978Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:22:55.455037Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT SUM(\"UnitPrice\" * \"Quantity\" * (1 - \"Discount\")) FROM \"Order Details\" WHERE \"OrderID\" IN (SELECT \"OrderID\" FROM \"Orders\" WHERE \"OrderDate\" BETWEEN '1997-06-01' AND '1997-06-30') AND \"ProductID\""}}
+{"ts": "2026-06-07T19:22:55.484991Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:22:56.862766Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "sql_executor", "event": "done", "data": {"n_rows": 1, "error": null}}
+{"ts": "2026-06-07T19:22:56.886869Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:23:03.531930Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "synthesizer", "event": "done", "data": {"answer": "92163184.18"}}
+{"ts": "2026-06-07T19:23:03.557520Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:23:03.570714Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:23:03.586326Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:23:03.595694Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "checkpoint", "event": "done", "data": {"confidence": 0.73}}
+{"ts": "2026-06-07T19:25:40.827148Z", "question_id": "__warmup__", "node": "router", "event": "start", "data": {"question": "What is the return policy for beverages?"}}
+{"ts": "2026-06-07T19:27:57.341398Z", "question_id": "__warmup__", "node": "router", "event": "start", "data": {"question": "What is the return policy for beverages?"}}
+{"ts": "2026-06-07T19:28:46.183152Z", "question_id": "__warmup__", "node": "router", "event": "done", "data": {"route": "rag"}}
+{"ts": "2026-06-07T19:28:46.205855Z", "question_id": "__warmup__", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:28:46.235147Z", "question_id": "__warmup__", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.33073860466243404}}
+{"ts": "2026-06-07T19:28:46.258385Z", "question_id": "__warmup__", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:28:58.078288Z", "question_id": "__warmup__", "node": "planner", "event": "done", "data": {"constraints": {"date_range": null, "kpi_formula": "", "categories": ["Beverages"], "entities": []}}}
+{"ts": "2026-06-07T19:28:58.086442Z", "question_id": "__warmup__", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:29:08.960886Z", "question_id": "__warmup__", "node": "synthesizer", "event": "done", "data": {"answer": "\"Return policy information for beverages is not available in the provided contex"}}
+{"ts": "2026-06-07T19:29:08.973529Z", "question_id": "__warmup__", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:29:08.986703Z", "question_id": "__warmup__", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:29:09.002705Z", "question_id": "__warmup__", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:29:09.015669Z", "question_id": "__warmup__", "node": "checkpoint", "event": "done", "data": {"confidence": 0.5315}}
+{"ts": "2026-06-07T19:29:38.357753Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "start", "data": {"question": "Top 3 products by total revenue all-time. Revenue uses Order Details: SUM(UnitPrice*Quantity*(1-Disc"}}
+{"ts": "2026-06-07T19:29:45.776887Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:29:45.790280Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:29:45.804061Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "done", "data": {"n_chunks": 4, "avg_score": 0.3969571437949639}}
+{"ts": "2026-06-07T19:29:45.816677Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:30:02.167595Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-12-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice*Quantity*(1-Discount))", "categories": [], "entities": []}}}
+{"ts": "2026-06-07T19:30:02.186496Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:30:13.933307Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT ProductID, SUM(UnitPrice*Quantity*(1-Discount)) AS Revenue FROM \"Order Details\" GROUP BY ProductID ORDER BY Revenue DESC LIMIT 3;"}}
+{"ts": "2026-06-07T19:30:13.942591Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:30:14.767622Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "done", "data": {"n_rows": 3, "error": null}}
+{"ts": "2026-06-07T19:30:14.780338Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:30:14.790673Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "done", "data": {"answer": "[{'product': '38', 'revenue': 53265895.23}, {'product': '29', 'revenue': 2462346"}}
+{"ts": "2026-06-07T19:30:14.803883Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:30:14.815069Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:30:14.828331Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:30:14.837903Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "done", "data": {"confidence": 0.79}}
+{"ts": "2026-06-07T19:31:49.685502Z", "question_id": "rag_policy_beverages_return_days", "node": "router", "event": "start", "data": {"question": "According to the product policy, what is the return window (days) for unopened Beverages? Return an "}}
+{"ts": "2026-06-07T19:32:06.042868Z", "question_id": "rag_policy_beverages_return_days", "node": "router", "event": "done", "data": {"route": "rag"}}
+{"ts": "2026-06-07T19:32:06.056978Z", "question_id": "rag_policy_beverages_return_days", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:32:06.069099Z", "question_id": "rag_policy_beverages_return_days", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.2783019944728783}}
+{"ts": "2026-06-07T19:32:06.082609Z", "question_id": "rag_policy_beverages_return_days", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:32:21.076500Z", "question_id": "rag_policy_beverages_return_days", "node": "planner", "event": "done", "data": {"constraints": {"date_range": null, "kpi_formula": "", "categories": ["Beverages"], "entities": []}}}
+{"ts": "2026-06-07T19:32:21.100412Z", "question_id": "rag_policy_beverages_return_days", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:32:21.114118Z", "question_id": "rag_policy_beverages_return_days", "node": "synthesizer", "event": "done", "data": {"answer": "14"}}
+{"ts": "2026-06-07T19:32:21.128724Z", "question_id": "rag_policy_beverages_return_days", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:32:21.140210Z", "question_id": "rag_policy_beverages_return_days", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:32:21.154335Z", "question_id": "rag_policy_beverages_return_days", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:32:21.164114Z", "question_id": "rag_policy_beverages_return_days", "node": "checkpoint", "event": "done", "data": {"confidence": 0.4948}}
+{"ts": "2026-06-07T19:32:21.180556Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "router", "event": "start", "data": {"question": "During 'Summer Beverages 1997' as defined in the marketing calendar, which product category had the "}}
+{"ts": "2026-06-07T19:32:27.287729Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "router", "event": "done", "data": {"route": "hybrid"}}
+{"ts": "2026-06-07T19:32:27.312265Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:32:27.339090Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.2998187060244867}}
+{"ts": "2026-06-07T19:32:27.363307Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:32:41.447916Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-06-01", "end": "1997-06-30"}, "kpi_formula": "", "categories": ["Beverages"], "entities": ["Summer Beverages 1997"]}}}
+{"ts": "2026-06-07T19:32:41.472776Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:32:53.352508Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT CategoryName, SUM(Quantity) AS TotalQuantity FROM \"Products\"\nJOIN \"Order Details\" ON \"Products\".ProductID = \"Order Details\".ProductID\nWHERE \"Order Details\".OrderID IN (SELECT OrderID FROM \"Orde"}}
+{"ts": "2026-06-07T19:32:53.364232Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:32:53.401144Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "sql_executor", "event": "done", "data": {"n_rows": 0, "error": "no such column: CategoryName"}}
+{"ts": "2026-06-07T19:32:53.415387Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:33:01.378743Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "synthesizer", "event": "done", "data": {"answer": "{'category': 'Beverages', 'quantity': None}"}}
+{"ts": "2026-06-07T19:33:01.390616Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:33:01.400378Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "validator", "event": "done", "data": {"is_valid": false, "errors": ["'quantity' expected int, got NoneType", "sql_execution_error: no such column: CategoryName"]}}
+{"ts": "2026-06-07T19:33:01.411836Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "repair", "event": "start", "data": {"attempt": 1, "errors": ["'quantity' expected int, got NoneType", "sql_execution_error: no such column: CategoryName"]}}
+{"ts": "2026-06-07T19:33:02.381526Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "repair", "event": "done", "data": {"answer": "{'category': 'Beverages', 'quantity': None}"}}
+{"ts": "2026-06-07T19:33:02.403454Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:33:02.422149Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "validator", "event": "done", "data": {"is_valid": false, "errors": ["'quantity' expected int, got NoneType"]}}
+{"ts": "2026-06-07T19:33:02.445676Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "repair", "event": "start", "data": {"attempt": 2, "errors": ["'quantity' expected int, got NoneType"]}}
+{"ts": "2026-06-07T19:33:02.465164Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "repair", "event": "done", "data": {"answer": "{'category': 'Beverages', 'quantity': None}"}}
+{"ts": "2026-06-07T19:33:02.489922Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:33:02.510033Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "validator", "event": "done", "data": {"is_valid": false, "errors": ["'quantity' expected int, got NoneType"]}}
+{"ts": "2026-06-07T19:33:02.533517Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:33:02.555706Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "checkpoint", "event": "done", "data": {"confidence": 0.075}}
+{"ts": "2026-06-07T19:33:02.584339Z", "question_id": "hybrid_aov_winter_1997", "node": "router", "event": "start", "data": {"question": "Using the AOV definition from the KPI docs, what was the Average Order Value during 'Winter Classics"}}
+{"ts": "2026-06-07T19:33:12.186766Z", "question_id": "hybrid_aov_winter_1997", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:33:12.200574Z", "question_id": "hybrid_aov_winter_1997", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:33:12.224175Z", "question_id": "hybrid_aov_winter_1997", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.3770255841878286}}
+{"ts": "2026-06-07T19:33:12.250812Z", "question_id": "hybrid_aov_winter_1997", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:33:30.952164Z", "question_id": "hybrid_aov_winter_1997", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-12-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice*Quantity*(1-Discount)) / COUNT(DISTINCT OrderID)", "categories": ["Dairy Products", "Confections"], "entities": ["Winter Classics 1997"]}}}
+{"ts": "2026-06-07T19:33:30.962406Z", "question_id": "hybrid_aov_winter_1997", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:33:42.211636Z", "question_id": "hybrid_aov_winter_1997", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT CAST(SUM(UnitPrice * Quantity * (1 - Discount)) AS REAL) / COUNT(DISTINCT OrderID) FROM \"Order Details\" WHERE OrderID IN (SELECT OrderID FROM \"Orders\" WHERE OrderDate BETWEEN '1997-12-01' AND '"}}
+{"ts": "2026-06-07T19:33:42.225914Z", "question_id": "hybrid_aov_winter_1997", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:33:43.104520Z", "question_id": "hybrid_aov_winter_1997", "node": "sql_executor", "event": "done", "data": {"n_rows": 1, "error": null}}
+{"ts": "2026-06-07T19:33:43.111321Z", "question_id": "hybrid_aov_winter_1997", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:33:43.122345Z", "question_id": "hybrid_aov_winter_1997", "node": "synthesizer", "event": "done", "data": {"answer": "27538.79"}}
+{"ts": "2026-06-07T19:33:43.136303Z", "question_id": "hybrid_aov_winter_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:33:43.147587Z", "question_id": "hybrid_aov_winter_1997", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:33:43.161053Z", "question_id": "hybrid_aov_winter_1997", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:33:43.171680Z", "question_id": "hybrid_aov_winter_1997", "node": "checkpoint", "event": "done", "data": {"confidence": 0.73}}
+{"ts": "2026-06-07T19:33:43.186876Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "start", "data": {"question": "Top 3 products by total revenue all-time. Revenue uses Order Details: SUM(UnitPrice*Quantity*(1-Disc"}}
+{"ts": "2026-06-07T19:33:53.571312Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:33:53.578249Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:33:53.599183Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "done", "data": {"n_chunks": 4, "avg_score": 0.3969571437949639}}
+{"ts": "2026-06-07T19:33:53.613121Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:35:20.030737Z", "question_id": "__warmup__", "node": "router", "event": "start", "data": {"question": "What is the return policy for beverages?"}}
+{"ts": "2026-06-07T19:36:09.643734Z", "question_id": "__warmup__", "node": "router", "event": "done", "data": {"route": "rag"}}
+{"ts": "2026-06-07T19:36:09.657632Z", "question_id": "__warmup__", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:36:09.675905Z", "question_id": "__warmup__", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.33073860466243404}}
+{"ts": "2026-06-07T19:36:09.689475Z", "question_id": "__warmup__", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:36:23.799085Z", "question_id": "__warmup__", "node": "planner", "event": "done", "data": {"constraints": {"date_range": null, "kpi_formula": "", "categories": ["Beverages"], "entities": []}}}
+{"ts": "2026-06-07T19:36:23.808405Z", "question_id": "__warmup__", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:36:28.822683Z", "question_id": "__warmup__", "node": "synthesizer", "event": "done", "data": {"answer": "\"Return policy information for beverages is not available in the provided contex"}}
+{"ts": "2026-06-07T19:36:28.836339Z", "question_id": "__warmup__", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:36:28.847762Z", "question_id": "__warmup__", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:36:28.863606Z", "question_id": "__warmup__", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:36:28.876283Z", "question_id": "__warmup__", "node": "checkpoint", "event": "done", "data": {"confidence": 0.5315}}
+{"ts": "2026-06-07T19:37:25.270214Z", "question_id": "rag_policy_beverages_return_days", "node": "router", "event": "start", "data": {"question": "According to the product policy, what is the return window (days) for unopened Beverages? Return an "}}
+{"ts": "2026-06-07T19:37:29.805403Z", "question_id": "rag_policy_beverages_return_days", "node": "router", "event": "done", "data": {"route": "rag"}}
+{"ts": "2026-06-07T19:37:29.814211Z", "question_id": "rag_policy_beverages_return_days", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:37:29.827040Z", "question_id": "rag_policy_beverages_return_days", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.2783019944728783}}
+{"ts": "2026-06-07T19:37:29.844451Z", "question_id": "rag_policy_beverages_return_days", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:37:41.037789Z", "question_id": "rag_policy_beverages_return_days", "node": "planner", "event": "done", "data": {"constraints": {"date_range": null, "kpi_formula": "", "categories": ["Beverages"], "entities": []}}}
+{"ts": "2026-06-07T19:37:41.064211Z", "question_id": "rag_policy_beverages_return_days", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:37:41.075243Z", "question_id": "rag_policy_beverages_return_days", "node": "synthesizer", "event": "done", "data": {"answer": "14"}}
+{"ts": "2026-06-07T19:37:41.089961Z", "question_id": "rag_policy_beverages_return_days", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:37:41.101490Z", "question_id": "rag_policy_beverages_return_days", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:37:41.115471Z", "question_id": "rag_policy_beverages_return_days", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:37:41.126666Z", "question_id": "rag_policy_beverages_return_days", "node": "checkpoint", "event": "done", "data": {"confidence": 0.4948}}
+{"ts": "2026-06-07T19:39:58.518943Z", "question_id": "hybrid_best_customer_margin_1997", "node": "router", "event": "start", "data": {"question": "Per the KPI definition of gross margin, who was the top customer by gross margin in 1997? Assume Cos"}}
+{"ts": "2026-06-07T19:40:05.788783Z", "question_id": "hybrid_best_customer_margin_1997", "node": "router", "event": "done", "data": {"route": "hybrid"}}
+{"ts": "2026-06-07T19:40:05.822946Z", "question_id": "hybrid_best_customer_margin_1997", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:40:05.837920Z", "question_id": "hybrid_best_customer_margin_1997", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.27377755447721114}}
+{"ts": "2026-06-07T19:40:05.856072Z", "question_id": "hybrid_best_customer_margin_1997", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:40:31.551037Z", "question_id": "hybrid_best_customer_margin_1997", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-01-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice * 0.3 * Quantity * (1-Discount))", "categories": [], "entities": []}}}
+{"ts": "2026-06-07T19:40:31.565876Z", "question_id": "hybrid_best_customer_margin_1997", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:40:48.143181Z", "question_id": "hybrid_best_customer_margin_1997", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT c.CompanyName AS customer, SUM(UnitPrice * 0.3 * Quantity * (1-Discount)) AS margin FROM \"Order Details\" od JOIN \"Customers\" c ON od.CustomerID = c.CustomerID WHERE od.OrderID IN (SELECT OrderI"}}
+{"ts": "2026-06-07T19:40:48.162799Z", "question_id": "hybrid_best_customer_margin_1997", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:40:48.190088Z", "question_id": "hybrid_best_customer_margin_1997", "node": "sql_executor", "event": "done", "data": {"n_rows": 0, "error": "no such column: od.CustomerID"}}
+{"ts": "2026-06-07T19:40:48.202650Z", "question_id": "hybrid_best_customer_margin_1997", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:40:53.797323Z", "question_id": "hybrid_best_customer_margin_1997", "node": "synthesizer", "event": "done", "data": {"answer": "{}"}}
+{"ts": "2026-06-07T19:40:53.839156Z", "question_id": "hybrid_best_customer_margin_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:40:53.864521Z", "question_id": "hybrid_best_customer_margin_1997", "node": "validator", "event": "done", "data": {"is_valid": false, "errors": ["Missing key 'customer' in answer dict", "Missing key 'margin' in answer dict", "sql_execution_error: no such column: od.CustomerID"]}}
+{"ts": "2026-06-07T19:40:53.896637Z", "question_id": "hybrid_best_customer_margin_1997", "node": "repair", "event": "start", "data": {"attempt": 1, "errors": ["Missing key 'customer' in answer dict", "Missing key 'margin' in answer dict", "sql_execution_error: no such column: od.CustomerID"]}}
+{"ts": "2026-06-07T19:40:57.038452Z", "question_id": "hybrid_best_customer_margin_1997", "node": "repair", "event": "done", "data": {"answer": "{'customer': 'IT', 'margin': 2923611.39}"}}
+{"ts": "2026-06-07T19:40:57.062842Z", "question_id": "hybrid_best_customer_margin_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:40:57.082596Z", "question_id": "hybrid_best_customer_margin_1997", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:40:57.109184Z", "question_id": "hybrid_best_customer_margin_1997", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:40:57.131956Z", "question_id": "hybrid_best_customer_margin_1997", "node": "checkpoint", "event": "done", "data": {"confidence": 0.5384}}
+{"ts": "2026-06-07T19:43:23.097024Z", "question_id": "rag_policy_beverages_return_days", "node": "router", "event": "start", "data": {"question": "According to the product policy, what is the return window (days) for unopened Beverages? Return an "}}
+{"ts": "2026-06-07T19:43:28.112141Z", "question_id": "rag_policy_beverages_return_days", "node": "router", "event": "done", "data": {"route": "rag"}}
+{"ts": "2026-06-07T19:43:28.127967Z", "question_id": "rag_policy_beverages_return_days", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:43:28.141626Z", "question_id": "rag_policy_beverages_return_days", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.2783019944728783}}
+{"ts": "2026-06-07T19:43:28.157165Z", "question_id": "rag_policy_beverages_return_days", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:43:39.998837Z", "question_id": "rag_policy_beverages_return_days", "node": "planner", "event": "done", "data": {"constraints": {"date_range": null, "kpi_formula": "", "categories": ["Beverages"], "entities": []}}}
+{"ts": "2026-06-07T19:43:40.044082Z", "question_id": "rag_policy_beverages_return_days", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:43:40.058322Z", "question_id": "rag_policy_beverages_return_days", "node": "synthesizer", "event": "done", "data": {"answer": "14"}}
+{"ts": "2026-06-07T19:43:40.073034Z", "question_id": "rag_policy_beverages_return_days", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:43:40.084722Z", "question_id": "rag_policy_beverages_return_days", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:43:40.099920Z", "question_id": "rag_policy_beverages_return_days", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:43:40.110826Z", "question_id": "rag_policy_beverages_return_days", "node": "checkpoint", "event": "done", "data": {"confidence": 0.4948}}
+{"ts": "2026-06-07T19:43:47.351253Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "start", "data": {"question": "Top 3 products by total revenue all-time. Revenue uses Order Details: SUM(UnitPrice*Quantity*(1-Disc"}}
+{"ts": "2026-06-07T19:43:57.365153Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:43:57.388166Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:43:57.412503Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "done", "data": {"n_chunks": 4, "avg_score": 0.3969571437949639}}
+{"ts": "2026-06-07T19:43:57.437327Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:44:17.425827Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-12-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice*Quantity*(1-Discount))", "categories": [], "entities": []}}}
+{"ts": "2026-06-07T19:44:17.441176Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:44:26.999366Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT p.ProductName AS product, SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) AS revenue FROM \"Order Details\" od JOIN Products p ON od.ProductID = p.ProductID GROUP BY p.ProductName ORDER BY re"}}
+{"ts": "2026-06-07T19:44:27.007669Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:44:28.257702Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "done", "data": {"n_rows": 3, "error": null}}
+{"ts": "2026-06-07T19:44:28.279398Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:44:28.292050Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "done", "data": {"answer": "[{'product': 'C\u00f4te de Blaye', 'revenue': 53265895.23}, {'product': 'Th\u00fcringer Ro"}}
+{"ts": "2026-06-07T19:44:28.307878Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:44:28.319133Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:44:28.331977Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:44:28.341175Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "done", "data": {"confidence": 0.79}}
+{"ts": "2026-06-07T19:46:31.870907Z", "question_id": "__warmup__", "node": "router", "event": "start", "data": {"question": "What is the return policy for beverages?"}}
+{"ts": "2026-06-07T19:47:43.130067Z", "question_id": "__warmup__", "node": "router", "event": "done", "data": {"route": "rag"}}
+{"ts": "2026-06-07T19:47:43.150489Z", "question_id": "__warmup__", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:47:43.223463Z", "question_id": "__warmup__", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.33073860466243404}}
+{"ts": "2026-06-07T19:47:43.253085Z", "question_id": "__warmup__", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:47:56.460781Z", "question_id": "__warmup__", "node": "planner", "event": "done", "data": {"constraints": {"date_range": null, "kpi_formula": "", "categories": ["Beverages"], "entities": []}}}
+{"ts": "2026-06-07T19:47:56.514629Z", "question_id": "__warmup__", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:48:06.654640Z", "question_id": "__warmup__", "node": "synthesizer", "event": "done", "data": {"answer": "\"Return policy information for beverages is not available in the provided contex"}}
+{"ts": "2026-06-07T19:48:06.681100Z", "question_id": "__warmup__", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:48:06.702508Z", "question_id": "__warmup__", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:48:06.727927Z", "question_id": "__warmup__", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:48:06.747758Z", "question_id": "__warmup__", "node": "checkpoint", "event": "done", "data": {"confidence": 0.5315}}
+{"ts": "2026-06-07T19:50:03.569461Z", "question_id": "rag_policy_beverages_return_days", "node": "router", "event": "start", "data": {"question": "According to the product policy, what is the return window (days) for unopened Beverages? Return an "}}
+{"ts": "2026-06-07T19:50:09.098779Z", "question_id": "rag_policy_beverages_return_days", "node": "router", "event": "done", "data": {"route": "rag"}}
+{"ts": "2026-06-07T19:50:09.124718Z", "question_id": "rag_policy_beverages_return_days", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:50:09.144101Z", "question_id": "rag_policy_beverages_return_days", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.2783019944728783}}
+{"ts": "2026-06-07T19:50:09.163182Z", "question_id": "rag_policy_beverages_return_days", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:50:21.217436Z", "question_id": "rag_policy_beverages_return_days", "node": "planner", "event": "done", "data": {"constraints": {"date_range": null, "kpi_formula": "", "categories": ["Beverages"], "entities": []}}}
+{"ts": "2026-06-07T19:50:21.238320Z", "question_id": "rag_policy_beverages_return_days", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:50:21.249018Z", "question_id": "rag_policy_beverages_return_days", "node": "synthesizer", "event": "done", "data": {"answer": "14"}}
+{"ts": "2026-06-07T19:50:21.262918Z", "question_id": "rag_policy_beverages_return_days", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:50:21.274040Z", "question_id": "rag_policy_beverages_return_days", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:50:21.288420Z", "question_id": "rag_policy_beverages_return_days", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:50:21.299938Z", "question_id": "rag_policy_beverages_return_days", "node": "checkpoint", "event": "done", "data": {"confidence": 0.4948}}
+{"ts": "2026-06-07T19:50:27.859735Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "router", "event": "start", "data": {"question": "During 'Summer Beverages 1997' as defined in the marketing calendar, which product category had the "}}
+{"ts": "2026-06-07T19:50:36.617186Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "router", "event": "done", "data": {"route": "hybrid"}}
+{"ts": "2026-06-07T19:50:36.631247Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:50:36.644253Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.2998187060244867}}
+{"ts": "2026-06-07T19:50:36.658204Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:50:52.217503Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-06-01", "end": "1997-06-30"}, "kpi_formula": "", "categories": ["Beverages"], "entities": ["Summer Beverages 1997"]}}}
+{"ts": "2026-06-07T19:50:52.239932Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:51:13.122476Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT c.CategoryName AS category, SUM(od.Quantity) AS quantity FROM \"Order Details\" od JOIN Products p ON od.ProductID = p.ProductID JOIN Categories c ON p.CategoryID = c.CategoryID JOIN Orders o ON "}}
+{"ts": "2026-06-07T19:51:13.134803Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:51:15.000872Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "sql_executor", "event": "done", "data": {"n_rows": 1, "error": null}}
+{"ts": "2026-06-07T19:51:15.015524Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:51:15.026611Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "synthesizer", "event": "done", "data": {"answer": "{'category': 'Confections', 'quantity': 2628466}"}}
+{"ts": "2026-06-07T19:51:15.041080Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:51:15.052454Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:51:15.066632Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:51:15.077259Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "checkpoint", "event": "done", "data": {"confidence": 0.645}}
+{"ts": "2026-06-07T19:51:18.531767Z", "question_id": "hybrid_aov_winter_1997", "node": "router", "event": "start", "data": {"question": "Using the AOV definition from the KPI docs, what was the Average Order Value during 'Winter Classics"}}
+{"ts": "2026-06-07T19:51:30.684345Z", "question_id": "hybrid_aov_winter_1997", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:51:30.702600Z", "question_id": "hybrid_aov_winter_1997", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:51:30.741484Z", "question_id": "hybrid_aov_winter_1997", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.3770255841878286}}
+{"ts": "2026-06-07T19:51:30.796791Z", "question_id": "hybrid_aov_winter_1997", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:51:49.102702Z", "question_id": "hybrid_aov_winter_1997", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-12-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice*Quantity*(1-Discount)) / COUNT(DISTINCT OrderID)", "categories": ["Dairy Products", "Confections"], "entities": ["Winter Classics 1997"]}}}
+{"ts": "2026-06-07T19:51:49.113876Z", "question_id": "hybrid_aov_winter_1997", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:51:58.728501Z", "question_id": "hybrid_aov_winter_1997", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) / COUNT(DISTINCT o.OrderID) \nFROM \"Order Details\" od\nJOIN Orders o ON od.OrderID = o.OrderID\nWHERE o.OrderDate BETWEEN '1997-12-01' AND '1997"}}
+{"ts": "2026-06-07T19:51:58.740241Z", "question_id": "hybrid_aov_winter_1997", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:52:00.124863Z", "question_id": "hybrid_aov_winter_1997", "node": "sql_executor", "event": "done", "data": {"n_rows": 1, "error": null}}
+{"ts": "2026-06-07T19:52:00.138718Z", "question_id": "hybrid_aov_winter_1997", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:52:00.151237Z", "question_id": "hybrid_aov_winter_1997", "node": "synthesizer", "event": "done", "data": {"answer": "27538.79"}}
+{"ts": "2026-06-07T19:52:00.165738Z", "question_id": "hybrid_aov_winter_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:52:00.176785Z", "question_id": "hybrid_aov_winter_1997", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:52:00.190899Z", "question_id": "hybrid_aov_winter_1997", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:52:00.202127Z", "question_id": "hybrid_aov_winter_1997", "node": "checkpoint", "event": "done", "data": {"confidence": 0.73}}
+{"ts": "2026-06-07T19:52:06.466718Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "start", "data": {"question": "Top 3 products by total revenue all-time. Revenue uses Order Details: SUM(UnitPrice*Quantity*(1-Disc"}}
+{"ts": "2026-06-07T19:52:15.723047Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:52:15.742063Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:52:15.767314Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "done", "data": {"n_chunks": 4, "avg_score": 0.3969571437949639}}
+{"ts": "2026-06-07T19:52:15.782105Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:52:36.317920Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-12-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice*Quantity*(1-Discount))", "categories": [], "entities": []}}}
+{"ts": "2026-06-07T19:52:36.332634Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:52:45.520356Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT p.ProductName AS product, SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) AS revenue FROM \"Order Details\" od JOIN Products p ON od.ProductID = p.ProductID GROUP BY p.ProductName ORDER BY re"}}
+{"ts": "2026-06-07T19:52:45.553581Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:52:46.981304Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "done", "data": {"n_rows": 3, "error": null}}
+{"ts": "2026-06-07T19:52:46.994008Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:52:47.004461Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "done", "data": {"answer": "[{'product': 'C\u00f4te de Blaye', 'revenue': 53265895.23}, {'product': 'Th\u00fcringer Ro"}}
+{"ts": "2026-06-07T19:52:47.021443Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:52:47.035015Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:52:47.050843Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:52:47.062450Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "done", "data": {"confidence": 0.79}}
+{"ts": "2026-06-07T19:54:21.525262Z", "question_id": "__warmup__", "node": "router", "event": "start", "data": {"question": "What is the return policy for beverages?"}}
+{"ts": "2026-06-07T19:55:31.437779Z", "question_id": "__warmup__", "node": "router", "event": "done", "data": {"route": "rag"}}
+{"ts": "2026-06-07T19:55:31.444703Z", "question_id": "__warmup__", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:55:31.460206Z", "question_id": "__warmup__", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.33073860466243404}}
+{"ts": "2026-06-07T19:55:31.476180Z", "question_id": "__warmup__", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:55:44.558400Z", "question_id": "__warmup__", "node": "planner", "event": "done", "data": {"constraints": {"date_range": null, "kpi_formula": "", "categories": ["Beverages"], "entities": []}}}
+{"ts": "2026-06-07T19:55:44.582147Z", "question_id": "__warmup__", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:55:59.251361Z", "question_id": "__warmup__", "node": "synthesizer", "event": "done", "data": {"answer": "\"Return policy information for beverages is not available in the provided contex"}}
+{"ts": "2026-06-07T19:55:59.277664Z", "question_id": "__warmup__", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:55:59.299201Z", "question_id": "__warmup__", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:55:59.315354Z", "question_id": "__warmup__", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:55:59.329260Z", "question_id": "__warmup__", "node": "checkpoint", "event": "done", "data": {"confidence": 0.5315}}
+{"ts": "2026-06-07T19:56:06.761116Z", "question_id": "rag_policy_beverages_return_days", "node": "router", "event": "start", "data": {"question": "According to the product policy, what is the return window (days) for unopened Beverages? Return an "}}
+{"ts": "2026-06-07T19:56:11.935330Z", "question_id": "rag_policy_beverages_return_days", "node": "router", "event": "done", "data": {"route": "rag"}}
+{"ts": "2026-06-07T19:56:11.962191Z", "question_id": "rag_policy_beverages_return_days", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:56:11.988956Z", "question_id": "rag_policy_beverages_return_days", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.2783019944728783}}
+{"ts": "2026-06-07T19:56:12.019659Z", "question_id": "rag_policy_beverages_return_days", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:56:23.000606Z", "question_id": "rag_policy_beverages_return_days", "node": "planner", "event": "done", "data": {"constraints": {"date_range": null, "kpi_formula": "", "categories": ["Beverages"], "entities": []}}}
+{"ts": "2026-06-07T19:56:23.037815Z", "question_id": "rag_policy_beverages_return_days", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:56:23.051990Z", "question_id": "rag_policy_beverages_return_days", "node": "synthesizer", "event": "done", "data": {"answer": "14"}}
+{"ts": "2026-06-07T19:56:23.066900Z", "question_id": "rag_policy_beverages_return_days", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:56:23.077880Z", "question_id": "rag_policy_beverages_return_days", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:56:23.092800Z", "question_id": "rag_policy_beverages_return_days", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:56:23.104915Z", "question_id": "rag_policy_beverages_return_days", "node": "checkpoint", "event": "done", "data": {"confidence": 0.4948}}
+{"ts": "2026-06-07T19:56:25.759872Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "router", "event": "start", "data": {"question": "During 'Summer Beverages 1997' as defined in the marketing calendar, which product category had the "}}
+{"ts": "2026-06-07T19:56:33.464156Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "router", "event": "done", "data": {"route": "hybrid"}}
+{"ts": "2026-06-07T19:56:33.481919Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:56:33.500691Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.2998187060244867}}
+{"ts": "2026-06-07T19:56:33.515558Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:56:47.972388Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-06-01", "end": "1997-06-30"}, "kpi_formula": "", "categories": ["Beverages"], "entities": ["Summer Beverages 1997"]}}}
+{"ts": "2026-06-07T19:56:47.979970Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:56:59.531068Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT c.CategoryName AS category, SUM(od.Quantity) AS quantity FROM \"Order Details\" od JOIN Products p ON od.ProductID = p.ProductID JOIN Categories c ON p.CategoryID = c.CategoryID JOIN Orders o ON "}}
+{"ts": "2026-06-07T19:56:59.568582Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:57:04.398191Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "sql_executor", "event": "done", "data": {"n_rows": 1, "error": null}}
+{"ts": "2026-06-07T19:57:04.403615Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:57:04.413981Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "synthesizer", "event": "done", "data": {"answer": "{'category': 'Confections', 'quantity': 2628466}"}}
+{"ts": "2026-06-07T19:57:04.425995Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:57:04.436103Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:57:04.450371Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:57:04.461834Z", "question_id": "hybrid_top_category_qty_summer_1997", "node": "checkpoint", "event": "done", "data": {"confidence": 0.645}}
+{"ts": "2026-06-07T19:57:09.443847Z", "question_id": "hybrid_aov_winter_1997", "node": "router", "event": "start", "data": {"question": "Using the AOV definition from the KPI docs, what was the Average Order Value during 'Winter Classics"}}
+{"ts": "2026-06-07T19:57:20.960651Z", "question_id": "hybrid_aov_winter_1997", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:57:20.969304Z", "question_id": "hybrid_aov_winter_1997", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:57:20.981633Z", "question_id": "hybrid_aov_winter_1997", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.3770255841878286}}
+{"ts": "2026-06-07T19:57:20.995855Z", "question_id": "hybrid_aov_winter_1997", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:57:38.579551Z", "question_id": "hybrid_aov_winter_1997", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-12-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice*Quantity*(1-Discount)) / COUNT(DISTINCT OrderID)", "categories": ["Dairy Products", "Confections"], "entities": ["Winter Classics 1997"]}}}
+{"ts": "2026-06-07T19:57:38.598284Z", "question_id": "hybrid_aov_winter_1997", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:57:46.911522Z", "question_id": "hybrid_aov_winter_1997", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) / COUNT(DISTINCT o.OrderID) \nFROM \"Order Details\" AS od\nJOIN \"Orders\" AS o ON od.OrderID = o.OrderID\nWHERE o.OrderDate BETWEEN '1997-12-01' A"}}
+{"ts": "2026-06-07T19:57:46.931777Z", "question_id": "hybrid_aov_winter_1997", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:57:48.459731Z", "question_id": "hybrid_aov_winter_1997", "node": "sql_executor", "event": "done", "data": {"n_rows": 1, "error": null}}
+{"ts": "2026-06-07T19:57:48.491294Z", "question_id": "hybrid_aov_winter_1997", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:57:48.503350Z", "question_id": "hybrid_aov_winter_1997", "node": "synthesizer", "event": "done", "data": {"answer": "27538.79"}}
+{"ts": "2026-06-07T19:57:48.519059Z", "question_id": "hybrid_aov_winter_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:57:48.531708Z", "question_id": "hybrid_aov_winter_1997", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:57:48.546267Z", "question_id": "hybrid_aov_winter_1997", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:57:48.557436Z", "question_id": "hybrid_aov_winter_1997", "node": "checkpoint", "event": "done", "data": {"confidence": 0.73}}
+{"ts": "2026-06-07T19:57:52.365832Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "start", "data": {"question": "Top 3 products by total revenue all-time. Revenue uses Order Details: SUM(UnitPrice*Quantity*(1-Disc"}}
+{"ts": "2026-06-07T19:58:02.603384Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:58:02.621273Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:58:02.649644Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "retriever", "event": "done", "data": {"n_chunks": 4, "avg_score": 0.3969571437949639}}
+{"ts": "2026-06-07T19:58:02.677359Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:58:23.458954Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-12-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice*Quantity*(1-Discount))", "categories": [], "entities": []}}}
+{"ts": "2026-06-07T19:58:23.478002Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:58:31.147621Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT p.ProductName AS product, SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)) AS revenue FROM \"Order Details\" od JOIN Products p ON od.ProductID = p.ProductID GROUP BY p.ProductName ORDER BY re"}}
+{"ts": "2026-06-07T19:58:31.171390Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:58:32.465636Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "sql_executor", "event": "done", "data": {"n_rows": 3, "error": null}}
+{"ts": "2026-06-07T19:58:32.481382Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:58:32.495775Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "synthesizer", "event": "done", "data": {"answer": "[{'product': 'C\u00f4te de Blaye', 'revenue': 53265895.23}, {'product': 'Th\u00fcringer Ro"}}
+{"ts": "2026-06-07T19:58:32.511393Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:58:32.522442Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:58:32.535989Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:58:32.548672Z", "question_id": "sql_top3_products_by_revenue_alltime", "node": "checkpoint", "event": "done", "data": {"confidence": 0.79}}
+{"ts": "2026-06-07T19:58:35.183693Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "router", "event": "start", "data": {"question": "Total revenue from the 'Beverages' category during 'Summer Beverages 1997' dates. Return a float rou"}}
+{"ts": "2026-06-07T19:58:41.510916Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "router", "event": "done", "data": {"route": "sql"}}
+{"ts": "2026-06-07T19:58:41.527578Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:58:41.549131Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.34907709213039534}}
+{"ts": "2026-06-07T19:58:41.565011Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:59:01.151098Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-06-01", "end": "1997-06-30"}, "kpi_formula": "", "categories": ["Beverages"], "entities": ["Summer Beverages 1997"]}}}
+{"ts": "2026-06-07T19:59:01.168806Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:59:10.418590Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT ROUND(SUM(od.UnitPrice * od.Quantity * (1 - od.Discount)), 2) AS revenue FROM \"Order Details\" od JOIN Products p ON od.ProductID = p.ProductID JOIN Categories c ON p.CategoryID = c.CategoryID J"}}
+{"ts": "2026-06-07T19:59:10.427433Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:59:12.587676Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "sql_executor", "event": "done", "data": {"n_rows": 1, "error": null}}
+{"ts": "2026-06-07T19:59:12.616355Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:59:12.638023Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "synthesizer", "event": "done", "data": {"answer": "92163184.18"}}
+{"ts": "2026-06-07T19:59:12.684541Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:59:12.711746Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:59:12.742057Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:59:12.783698Z", "question_id": "hybrid_revenue_beverages_summer_1997", "node": "checkpoint", "event": "done", "data": {"confidence": 0.73}}
+{"ts": "2026-06-07T19:59:15.816495Z", "question_id": "hybrid_best_customer_margin_1997", "node": "router", "event": "start", "data": {"question": "Per the KPI definition of gross margin, who was the top customer by gross margin in 1997? Assume Cos"}}
+{"ts": "2026-06-07T19:59:23.694421Z", "question_id": "hybrid_best_customer_margin_1997", "node": "router", "event": "done", "data": {"route": "hybrid"}}
+{"ts": "2026-06-07T19:59:23.710944Z", "question_id": "hybrid_best_customer_margin_1997", "node": "retriever", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:59:23.724172Z", "question_id": "hybrid_best_customer_margin_1997", "node": "retriever", "event": "done", "data": {"n_chunks": 5, "avg_score": 0.27377755447721114}}
+{"ts": "2026-06-07T19:59:23.738286Z", "question_id": "hybrid_best_customer_margin_1997", "node": "planner", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:59:44.558696Z", "question_id": "hybrid_best_customer_margin_1997", "node": "planner", "event": "done", "data": {"constraints": {"date_range": {"start": "1997-01-01", "end": "1997-12-31"}, "kpi_formula": "SUM(UnitPrice * 0.3 * Quantity * (1-Discount))", "categories": [], "entities": []}}}
+{"ts": "2026-06-07T19:59:44.565559Z", "question_id": "hybrid_best_customer_margin_1997", "node": "nl2sql", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:59:56.718872Z", "question_id": "hybrid_best_customer_margin_1997", "node": "nl2sql", "event": "done", "data": {"sql": "SELECT c.CompanyName AS customer, SUM(od.UnitPrice * 0.3 * od.Quantity * (1 - od.Discount)) AS margin FROM \"Customers\" c JOIN \"Order Details\" od ON c.CustomerID = od.OrderID WHERE od.OrderID IN (SELEC"}}
+{"ts": "2026-06-07T19:59:56.738263Z", "question_id": "hybrid_best_customer_margin_1997", "node": "sql_executor", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:59:58.305966Z", "question_id": "hybrid_best_customer_margin_1997", "node": "sql_executor", "event": "done", "data": {"n_rows": 1, "error": null}}
+{"ts": "2026-06-07T19:59:58.319523Z", "question_id": "hybrid_best_customer_margin_1997", "node": "synthesizer", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:59:58.333461Z", "question_id": "hybrid_best_customer_margin_1997", "node": "synthesizer", "event": "done", "data": {"answer": "{'customer': 'IT', 'margin': 2923611.39}"}}
+{"ts": "2026-06-07T19:59:58.349264Z", "question_id": "hybrid_best_customer_margin_1997", "node": "validator", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:59:58.361209Z", "question_id": "hybrid_best_customer_margin_1997", "node": "validator", "event": "done", "data": {"is_valid": true, "errors": []}}
+{"ts": "2026-06-07T19:59:58.378618Z", "question_id": "hybrid_best_customer_margin_1997", "node": "checkpoint", "event": "start", "data": {}}
+{"ts": "2026-06-07T19:59:58.399072Z", "question_id": "hybrid_best_customer_margin_1997", "node": "checkpoint", "event": "done", "data": {"confidence": 0.6384}}

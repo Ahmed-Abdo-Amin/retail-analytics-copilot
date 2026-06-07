@@ -481,6 +481,17 @@ def nl2sql_node(state: AgentState) -> AgentState:
         sql = _build_sql_for_question(state.question, state.constraints, state.retrieved_chunks)
         logger.info(f"Using rule-based SQL fallback")
 
+    # ── Quality guard: reject SQL that exposes raw IDs instead of names ──
+    sql_upper = sql.upper()
+    # If query mentions product/category context but selects raw IDs, force fallback
+    selects_product_id  = "PRODUCTID" in sql_upper and "PRODUCTNAME" not in sql_upper
+    selects_category_id = "CATEGORYID" in sql_upper and "CATEGORYNAME" not in sql_upper
+    if selects_product_id or selects_category_id:
+        fallback = _build_sql_for_question(state.question, state.constraints, state.retrieved_chunks)
+        if fallback:
+            logger.info("SQL quality guard: replaced ID-only query with name-joined fallback")
+            sql = fallback
+
     state.generated_sql = sql
     trace.log("nl2sql", "done", {"sql": sql[:200]})
     state.trace.append({"node": "nl2sql", "sql": sql[:200]})

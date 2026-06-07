@@ -27,6 +27,8 @@ class NL2SQLSignature(dspy.Signature):
     Gross Margin = SUM((UnitPrice - 0.7*UnitPrice) * Quantity * (1-Discount)) = SUM(UnitPrice*0.3*Quantity*(1-Discount)).
     AOV = SUM(UnitPrice*Quantity*(1-Discount)) / COUNT(DISTINCT OrderID).
     Use double-quotes for table names with spaces: "Order Details".
+    IMPORTANT: Never SELECT ProductID as a label. Always JOIN Products and SELECT p.ProductName AS product.
+    IMPORTANT: Never SELECT CategoryID as a label. Always JOIN Categories and SELECT c.CategoryName AS category.
     Output ONLY the SQL query, no explanation, no markdown fences.
     """
     question: str = dspy.InputField(desc="Natural language question")

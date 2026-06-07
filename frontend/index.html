@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-/* ── Reset & Root ─────────────────────────────────────────────── */
+/* ── Reset & Root ──────────────────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#0a0c0f;
@@ -42,8 +42,6 @@ body{
   font-family:var(--mono);font-size:13px;line-height:1.6;
   min-height:100vh;overflow-x:hidden;
 }
-
-/* ── Noise texture overlay ────────────────────────────────────── */
 body::before{
   content:'';position:fixed;inset:0;pointer-events:none;z-index:999;
   opacity:.025;
@@ -51,326 +49,284 @@ body::before{
   background-size:200px 200px;
 }
 
-/* ── Grid layout ─────────────────────────────────────────────── */
+/* ── Layout ──────────────────────────────────────────────────────────────── */
 .app{display:grid;grid-template-rows:56px 1fr;min-height:100vh}
-
-/* ── Header ──────────────────────────────────────────────────── */
 header{
   display:flex;align-items:center;gap:16px;
   padding:0 24px;
-  background:var(--surface);
-  border-bottom:1px solid var(--border);
+  background:var(--surface);border-bottom:1px solid var(--border);
   position:sticky;top:0;z-index:100;
 }
-.logo{
-  font-family:var(--sans);font-weight:800;font-size:16px;
-  color:var(--accent);letter-spacing:-.02em;white-space:nowrap;
-}
+.logo{font-family:var(--sans);font-weight:800;font-size:16px;color:var(--accent);letter-spacing:-.02em;white-space:nowrap}
 .logo span{color:var(--text3);font-weight:400}
-.status-pill{
-  display:flex;align-items:center;gap:6px;
-  padding:3px 10px;border-radius:99px;font-size:11px;
-  background:var(--surface3);border:1px solid var(--border2);
-  color:var(--text2);
-}
+.status-pill{display:flex;align-items:center;gap:6px;padding:3px 10px;border-radius:99px;font-size:11px;background:var(--surface3);border:1px solid var(--border2);color:var(--text2)}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0}
 .dot.ok{background:var(--accent);box-shadow:0 0 8px var(--accent)}
 .dot.err{background:var(--err)}
 .dot.pulse{animation:pulse 1.5s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 nav{display:flex;gap:2px;margin-left:auto}
-nav button{
-  background:none;border:none;cursor:pointer;
-  padding:6px 14px;border-radius:var(--r);
-  font-family:var(--mono);font-size:12px;color:var(--text2);
-  transition:all .15s;
-}
+nav button{background:none;border:none;cursor:pointer;padding:6px 14px;border-radius:var(--r);font-family:var(--mono);font-size:12px;color:var(--text2);transition:all .15s}
 nav button:hover{background:var(--surface3);color:var(--text)}
 nav button.active{background:var(--accent-dim);color:var(--accent)}
 
-/* ── Main ────────────────────────────────────────────────────── */
 main{display:grid;grid-template-columns:280px 1fr;overflow:hidden;height:calc(100vh - 56px)}
 
-/* ── Sidebar ─────────────────────────────────────────────────── */
-.sidebar{
-  background:var(--surface);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;overflow:hidden;
-}
-.sidebar-header{
-  padding:16px;border-bottom:1px solid var(--border);
-  font-family:var(--sans);font-weight:600;font-size:11px;
-  text-transform:uppercase;letter-spacing:.1em;color:var(--text3);
-}
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+.sidebar{background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden}
+.sidebar-header{padding:16px;border-bottom:1px solid var(--border);font-family:var(--sans);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3)}
 .qs-list{overflow-y:auto;flex:1;padding:8px}
 .qs-list::-webkit-scrollbar{width:4px}
-.qs-list::-webkit-scrollbar-track{background:transparent}
 .qs-list::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
-.q-item{
-  padding:10px 12px;border-radius:var(--r);cursor:pointer;
-  margin-bottom:4px;border:1px solid transparent;
-  transition:all .15s;
-}
+.q-item{padding:10px 12px;border-radius:var(--r);cursor:pointer;margin-bottom:4px;border:1px solid transparent;transition:all .15s}
 .q-item:hover{background:var(--surface3);border-color:var(--border2)}
-.q-item.active{background:var(--accent-dim);border-color:var(--accent);border-opacity:.3}
+.q-item.active{background:var(--accent-dim);border-color:var(--accent)}
 .q-item-id{font-size:10px;color:var(--text3);margin-bottom:4px}
 .q-item-text{font-size:12px;color:var(--text2);line-height:1.4}
 .q-item.active .q-item-text{color:var(--text)}
-.q-badge{
-  display:inline-block;margin-top:6px;padding:2px 7px;border-radius:99px;
-  font-size:10px;background:var(--surface3);color:var(--text3);
-  border:1px solid var(--border2);
-}
+.q-badge{display:inline-block;margin-top:6px;padding:2px 7px;border-radius:99px;font-size:10px;background:var(--surface3);color:var(--text3);border:1px solid var(--border2)}
 .q-badge.rag{background:var(--info-dim);color:var(--info);border-color:rgba(77,166,255,.25)}
 .q-badge.sql{background:var(--warn-dim);color:var(--warn);border-color:rgba(245,166,35,.25)}
 .q-badge.hybrid{background:var(--accent-dim);color:var(--accent);border-color:rgba(0,229,160,.25)}
-.run-all-btn{
-  margin:12px;padding:10px;border-radius:var(--r);
-  background:var(--accent-dim2);border:1px solid rgba(0,229,160,.2);
-  color:var(--accent);font-family:var(--mono);font-size:12px;
-  cursor:pointer;transition:all .2s;
-}
+.run-all-btn{margin:12px;padding:10px;border-radius:var(--r);background:var(--accent-dim2);border:1px solid rgba(0,229,160,.2);color:var(--accent);font-family:var(--mono);font-size:12px;cursor:pointer;transition:all .2s}
 .run-all-btn:hover{background:var(--accent-dim);border-color:var(--accent)}
 .run-all-btn:disabled{opacity:.4;cursor:not-allowed}
 
-/* ── Content area ────────────────────────────────────────────── */
+/* ── Content ─────────────────────────────────────────────────────────────── */
 .content{display:flex;flex-direction:column;overflow:hidden}
 .tab-panels{flex:1;overflow:hidden;position:relative}
 .panel{position:absolute;inset:0;overflow-y:auto;display:none;padding:24px}
 .panel.active{display:block}
 .panel::-webkit-scrollbar{width:5px}
-.panel::-webkit-scrollbar-track{background:transparent}
 .panel::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
 
-/* ── Query panel ─────────────────────────────────────────────── */
-.query-box{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r2);padding:20px;margin-bottom:20px;
-}
-.query-label{
-  font-family:var(--sans);font-size:11px;font-weight:600;
-  text-transform:uppercase;letter-spacing:.1em;color:var(--text3);
-  margin-bottom:10px;
-}
-.query-input{
-  width:100%;background:var(--surface2);border:1px solid var(--border2);
-  border-radius:var(--r);padding:12px 14px;
-  font-family:var(--mono);font-size:13px;color:var(--text);
-  resize:vertical;min-height:72px;outline:none;
-  transition:border-color .15s;
-}
+/* ── Query panel ─────────────────────────────────────────────────────────── */
+.query-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:20px;margin-bottom:20px}
+.query-label{font-family:var(--sans);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:10px}
+.query-input{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r);padding:12px 14px;font-family:var(--mono);font-size:13px;color:var(--text);resize:vertical;min-height:72px;outline:none;transition:border-color .15s}
 .query-input:focus{border-color:var(--accent)}
 .query-row{display:flex;gap:12px;margin-top:12px;align-items:center}
-.fmt-select{
-  background:var(--surface2);border:1px solid var(--border2);
-  border-radius:var(--r);padding:8px 12px;
-  font-family:var(--mono);font-size:12px;color:var(--text);outline:none;
-  cursor:pointer;
-}
+.fmt-select{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r);padding:8px 12px;font-family:var(--mono);font-size:12px;color:var(--text);outline:none;cursor:pointer}
 .fmt-select:focus{border-color:var(--accent)}
-.send-btn{
-  padding:8px 20px;border-radius:var(--r);
-  background:var(--accent);border:none;
-  font-family:var(--sans);font-weight:700;font-size:13px;color:#000;
-  cursor:pointer;transition:all .2s;margin-left:auto;
-  display:flex;align-items:center;gap:8px;
-}
-.send-btn:hover{background:var(--accent2);transform:translateY(-1px)}
+.send-btn{padding:8px 20px;border-radius:var(--r);background:var(--accent);border:none;font-family:var(--sans);font-weight:700;font-size:13px;color:#000;cursor:pointer;transition:all .2s;margin-left:auto;display:flex;align-items:center;gap:8px}
+.send-btn:hover:not(:disabled){background:var(--accent2);transform:translateY(-1px)}
 .send-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .send-btn .spin{display:none;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .7s linear infinite}
 .send-btn.loading .spin{display:block}
 .send-btn.loading .btn-text{display:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ── Result card ─────────────────────────────────────────────── */
-.result-card{
+/* ── Stream Progress ─────────────────────────────────────────────────────── */
+/* ── Narrative stream bar ──────────────────────────────────────────────── */
+.narrative-bar{
   background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r2);overflow:hidden;animation:slideUp .25s ease;
+  border-radius:var(--r2);padding:18px 22px;margin-bottom:20px;
+  animation:slideUp .25s ease;line-height:1.9;
+  font-size:14px;font-family:var(--mono);
 }
-@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.result-header{
-  display:flex;align-items:center;gap:12px;padding:14px 18px;
-  border-bottom:1px solid var(--border);background:var(--surface2);
+/* dim finished segments */
+.ns-seg{transition:opacity .4s,color .4s}
+.ns-seg.done{opacity:.45;color:var(--text3)}
+.ns-seg.active{opacity:1;color:var(--text)}
+/* separator arrow */
+.ns-arrow{color:var(--text3);padding:0 4px;opacity:.5}
+/* inline spinner after the active segment */
+.ns-spinner{
+  display:inline-block;width:10px;height:10px;
+  border:2px solid var(--border2);border-top-color:var(--accent);
+  border-radius:50%;animation:spin .65s linear infinite;
+  vertical-align:middle;margin-left:5px;
 }
-.result-id{font-family:var(--sans);font-weight:700;font-size:13px}
-.result-route{padding:2px 8px;border-radius:99px;font-size:10px}
-.result-conf{margin-left:auto;font-size:12px;color:var(--text2)}
-.conf-bar{
-  display:inline-block;width:60px;height:4px;background:var(--surface3);
-  border-radius:2px;margin-left:8px;vertical-align:middle;overflow:hidden;
+/* the final answer badge that replaces the spinner */
+.ns-answer{
+  display:inline;
+  color:var(--accent);font-family:var(--sans);font-weight:700;font-size:15px;
+  background:var(--accent-dim);padding:2px 8px;border-radius:4px;
+  margin-left:4px;animation:slideUp .3s ease;
 }
-.conf-fill{height:100%;border-radius:2px;background:var(--accent);transition:width .5s ease}
-.result-body{padding:18px}
-.r-section{margin-bottom:18px}
-.r-section:last-child{margin-bottom:0}
-.r-label{
-  font-size:10px;text-transform:uppercase;letter-spacing:.12em;
-  color:var(--text3);margin-bottom:8px;
-}
-.answer-block{
-  background:var(--surface2);border:1px solid var(--border2);
-  border-radius:var(--r);padding:14px;
-  font-family:var(--mono);font-size:13px;color:var(--accent);
-  word-break:break-all;
-}
-.sql-block{
-  background:#0d1117;border:1px solid var(--border2);
-  border-radius:var(--r);padding:14px;
-  font-family:var(--mono);font-size:12px;color:#7ee787;
-  white-space:pre-wrap;word-break:break-all;overflow-x:auto;
-}
-.expl-text{color:var(--text2);font-size:13px;line-height:1.6}
-.citations{display:flex;flex-wrap:wrap;gap:6px}
-.cite-tag{
-  padding:3px 9px;border-radius:99px;font-size:11px;
-  background:var(--surface3);border:1px solid var(--border2);color:var(--text2);
-}
-.cite-tag.doc{background:var(--info-dim);color:var(--info);border-color:rgba(77,166,255,.25)}
-.cite-tag.db{background:var(--warn-dim);color:var(--warn);border-color:rgba(245,166,35,.25)}
-.repair-badge{
-  display:inline-flex;align-items:center;gap:5px;
-  padding:3px 9px;border-radius:99px;font-size:11px;
-  background:var(--err-dim);color:var(--err);border:1px solid rgba(255,77,109,.25);
+.ns-done-dot{
+  display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 6px var(--accent);
+  vertical-align:middle;margin-left:5px;
 }
 
-/* ── Batch panel ─────────────────────────────────────────────── */
-.batch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:16px}
-.batch-card{
+/* ── Result Card ─────────────────────────────────────────────────────────── */
+.result-card{
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r2);overflow:hidden;
-  transition:border-color .15s;
+  animation:slideUp .3s ease;
 }
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.result-header{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 20px;border-bottom:1px solid var(--border);
+  background:var(--surface2);flex-wrap:wrap;
+}
+.result-id{font-family:var(--sans);font-weight:700;font-size:14px;color:var(--text)}
+.result-route{padding:3px 10px;border-radius:99px;font-size:11px;font-weight:500}
+.result-conf{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2)}
+.conf-num{font-family:var(--sans);font-weight:700;font-size:15px}
+.conf-num.high{color:var(--accent)}
+.conf-num.mid{color:var(--warn)}
+.conf-num.low{color:var(--err)}
+.conf-bar{width:80px;height:5px;background:var(--surface3);border-radius:3px;overflow:hidden}
+.conf-fill{height:100%;border-radius:3px;background:var(--accent);transition:width .6s ease}
+.conf-fill.mid{background:var(--warn)}
+.conf-fill.low{background:var(--err)}
+.repair-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:99px;font-size:11px;background:var(--err-dim);color:var(--err);border:1px solid rgba(255,77,109,.25)}
+
+/* ── Result Sections ─────────────────────────────────────────────────────── */
+.result-body{padding:0}
+.r-section{border-bottom:1px solid var(--border);padding:16px 20px}
+.r-section:last-child{border-bottom:none}
+.r-label{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.r-label-icon{font-size:12px}
+
+/* ── Answer Block — structured ───────────────────────────────────────────── */
+.answer-wrap{display:flex;flex-direction:column;gap:8px}
+
+/* scalar answer */
+.answer-scalar{
+  background:var(--surface2);border:1px solid rgba(0,229,160,.2);
+  border-left:3px solid var(--accent);
+  border-radius:var(--r);padding:14px 18px;
+  font-family:var(--sans);font-weight:700;font-size:22px;color:var(--accent);
+}
+
+/* string answer */
+.answer-text{
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:var(--r);padding:14px 18px;
+  font-size:14px;color:var(--text);line-height:1.7;
+}
+
+/* list/table answer */
+.answer-table-wrap{border:1px solid var(--border2);border-radius:var(--r);overflow:hidden}
+.answer-table{width:100%;border-collapse:collapse;font-size:13px}
+.answer-table th{
+  padding:9px 14px;text-align:left;
+  background:var(--surface3);color:var(--text2);
+  font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+  border-bottom:1px solid var(--border);
+}
+.answer-table td{
+  padding:9px 14px;border-bottom:1px solid var(--border);
+  color:var(--text);
+}
+.answer-table tr:last-child td{border-bottom:none}
+.answer-table tr:hover td{background:var(--surface3)}
+.answer-table .num-cell{font-family:var(--sans);font-weight:600;color:var(--accent);text-align:right}
+.answer-table .rank-cell{color:var(--text3);font-size:11px;width:32px}
+
+/* object answer */
+.answer-obj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}
+.answer-obj-item{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r);padding:12px}
+.answer-obj-key{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:4px}
+.answer-obj-val{font-family:var(--sans);font-weight:600;font-size:15px;color:var(--accent)}
+
+/* raw fallback */
+.answer-raw{
+  background:#0d1117;border:1px solid var(--border2);
+  border-radius:var(--r);padding:14px;
+  font-family:var(--mono);font-size:12px;color:var(--text2);
+  white-space:pre-wrap;word-break:break-all;max-height:280px;overflow-y:auto;
+}
+
+/* ── SQL Block ───────────────────────────────────────────────────────────── */
+.sql-display{
+  background:#0d1117;border:1px solid var(--border2);
+  border-radius:var(--r);padding:14px;position:relative;
+  overflow:hidden;
+}
+.sql-display pre{
+  font-family:var(--mono);font-size:12px;color:#7ee787;
+  white-space:pre-wrap;word-break:break-all;margin:0;
+}
+.copy-sql-btn{
+  position:absolute;top:8px;right:8px;
+  padding:3px 10px;border-radius:5px;font-size:10px;
+  background:var(--surface3);border:1px solid var(--border2);
+  color:var(--text3);cursor:pointer;transition:all .15s;font-family:var(--mono);
+}
+.copy-sql-btn:hover{color:var(--text);border-color:var(--accent)}
+.sql-rows-badge{
+  display:inline-flex;align-items:center;gap:5px;margin-top:8px;
+  padding:3px 10px;border-radius:99px;font-size:11px;
+  background:var(--warn-dim);color:var(--warn);border:1px solid rgba(245,166,35,.25);
+}
+
+/* ── Explanation ─────────────────────────────────────────────────────────── */
+.expl-text{color:var(--text2);font-size:13px;line-height:1.75}
+
+/* ── Citations ───────────────────────────────────────────────────────────── */
+.citations{display:flex;flex-wrap:wrap;gap:6px}
+.cite-tag{padding:3px 9px;border-radius:99px;font-size:11px;background:var(--surface3);border:1px solid var(--border2);color:var(--text2)}
+.cite-tag.doc{background:var(--info-dim);color:var(--info);border-color:rgba(77,166,255,.25)}
+.cite-tag.db{background:var(--warn-dim);color:var(--warn);border-color:rgba(245,166,35,.25)}
+
+/* ── Batch ───────────────────────────────────────────────────────────────── */
+.batch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:16px}
+.batch-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;transition:border-color .15s}
 .batch-card:hover{border-color:var(--border2)}
-.batch-card-head{
-  display:flex;align-items:center;gap:8px;padding:12px 14px;
-  border-bottom:1px solid var(--border);background:var(--surface2);
-}
+.batch-card-head{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--border);background:var(--surface2)}
 .batch-card-id{font-size:11px;font-weight:500;flex:1;color:var(--text2)}
 .batch-card-body{padding:14px}
-.batch-answer{
-  font-size:13px;color:var(--accent);font-family:var(--mono);
-  margin-bottom:10px;word-break:break-all;
-}
+.batch-answer{font-size:13px;color:var(--accent);font-family:var(--mono);margin-bottom:10px;word-break:break-all}
 .mini-conf{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text3)}
 .mini-bar{flex:1;height:3px;background:var(--surface3);border-radius:2px;overflow:hidden}
 .mini-fill{height:100%;background:var(--accent);border-radius:2px}
 
-/* ── Schema panel ────────────────────────────────────────────── */
+/* ── Schema ──────────────────────────────────────────────────────────────── */
 .schema-grid{display:grid;gap:12px}
-.table-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r2);overflow:hidden;
-}
-.table-name{
-  padding:10px 16px;font-family:var(--sans);font-weight:700;font-size:13px;
-  background:var(--surface2);border-bottom:1px solid var(--border);
-  cursor:pointer;display:flex;align-items:center;justify-content:space-between;
-}
+.table-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden}
+.table-name{padding:10px 16px;font-family:var(--sans);font-weight:700;font-size:13px;background:var(--surface2);border-bottom:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:space-between}
 .table-name .arrow{transition:transform .2s;color:var(--text3)}
 .table-card.open .arrow{transform:rotate(90deg)}
 .col-table{display:none;width:100%;border-collapse:collapse}
 .table-card.open .col-table{display:table}
-.col-table th{
-  padding:7px 16px;text-align:left;font-size:10px;
-  text-transform:uppercase;letter-spacing:.1em;color:var(--text3);
-  background:var(--surface3);border-bottom:1px solid var(--border);
-}
-.col-table td{
-  padding:7px 16px;font-size:12px;border-bottom:1px solid var(--border);
-  color:var(--text2);
-}
+.col-table th{padding:7px 16px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);background:var(--surface3);border-bottom:1px solid var(--border)}
+.col-table td{padding:7px 16px;font-size:12px;border-bottom:1px solid var(--border);color:var(--text2)}
 .col-table tr:last-child td{border-bottom:none}
-.type-badge{
-  padding:1px 6px;border-radius:4px;font-size:10px;
-  background:var(--surface3);color:var(--text3);
-}
-.pk-badge{
-  padding:1px 6px;border-radius:4px;font-size:10px;
-  background:var(--warn-dim);color:var(--warn);margin-left:4px;
-}
+.type-badge{padding:1px 6px;border-radius:4px;font-size:10px;background:var(--surface3);color:var(--text3)}
+.pk-badge{padding:1px 6px;border-radius:4px;font-size:10px;background:var(--warn-dim);color:var(--warn);margin-left:4px}
 
-/* ── Docs panel ──────────────────────────────────────────────── */
+/* ── Docs ────────────────────────────────────────────────────────────────── */
 .doc-filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.doc-filter{
-  padding:5px 12px;border-radius:99px;font-size:11px;cursor:pointer;
-  background:var(--surface);border:1px solid var(--border2);color:var(--text2);
-  transition:all .15s;
-}
+.doc-filter{padding:5px 12px;border-radius:99px;font-size:11px;cursor:pointer;background:var(--surface);border:1px solid var(--border2);color:var(--text2);transition:all .15s}
 .doc-filter:hover{border-color:var(--accent);color:var(--accent)}
 .doc-filter.active{background:var(--accent-dim);border-color:var(--accent);color:var(--accent)}
 .chunk-grid{display:grid;gap:10px}
-.chunk-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r2);padding:14px;
-  transition:border-color .15s;
-}
+.chunk-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:14px;transition:border-color .15s}
 .chunk-card:hover{border-color:var(--border2)}
 .chunk-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.chunk-id{font-size:11px;color:var(--accent);font-family:var(--mono)}
+.chunk-id{font-size:11px;color:var(--accent)}
 .chunk-text{font-size:12px;color:var(--text2);line-height:1.6;white-space:pre-line}
 
-/* ── SQL panel ───────────────────────────────────────────────── */
-.sql-editor-wrap{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r2);padding:20px;margin-bottom:20px;
-}
-.sql-textarea{
-  width:100%;min-height:120px;background:#0d1117;
-  border:1px solid var(--border2);border-radius:var(--r);
-  padding:14px;font-family:var(--mono);font-size:13px;
-  color:#7ee787;resize:vertical;outline:none;
-  transition:border-color .15s;caret-color:#7ee787;
-}
+/* ── SQL Playground ──────────────────────────────────────────────────────── */
+.sql-editor-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:20px;margin-bottom:20px}
+.sql-textarea{width:100%;min-height:120px;background:#0d1117;border:1px solid var(--border2);border-radius:var(--r);padding:14px;font-family:var(--mono);font-size:13px;color:#7ee787;resize:vertical;outline:none;transition:border-color .15s;caret-color:#7ee787}
 .sql-textarea:focus{border-color:var(--accent)}
-.sql-run-btn{
-  margin-top:12px;padding:8px 20px;border-radius:var(--r);
-  background:var(--warn-dim);border:1px solid var(--warn);
-  color:var(--warn);font-family:var(--mono);font-size:13px;
-  cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:8px;
-}
+.sql-run-btn{margin-top:12px;padding:8px 20px;border-radius:var(--r);background:var(--warn-dim);border:1px solid var(--warn);color:var(--warn);font-family:var(--mono);font-size:13px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:8px}
 .sql-run-btn:hover{background:rgba(245,166,35,.2)}
 .sql-run-btn:disabled{opacity:.4;cursor:not-allowed}
-.sql-results{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r2);overflow:hidden;
-}
-.sql-result-head{
-  padding:10px 16px;font-size:11px;color:var(--text2);
-  background:var(--surface2);border-bottom:1px solid var(--border);
-  display:flex;justify-content:space-between;
-}
+.sql-results{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden}
+.sql-result-head{padding:10px 16px;font-size:11px;color:var(--text2);background:var(--surface2);border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
 .sql-table-wrap{overflow-x:auto;max-height:400px}
 table.sql-table{width:100%;border-collapse:collapse;font-size:12px}
-.sql-table th{
-  padding:8px 14px;text-align:left;
-  background:var(--surface3);color:var(--text2);
-  font-size:11px;text-transform:uppercase;letter-spacing:.08em;
-  border-bottom:1px solid var(--border);white-space:nowrap;
-  position:sticky;top:0;
-}
-.sql-table td{
-  padding:7px 14px;border-bottom:1px solid var(--border);
-  color:var(--text);white-space:nowrap;
-}
+.sql-table th{padding:8px 14px;text-align:left;background:var(--surface3);color:var(--text2);font-size:11px;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0}
+.sql-table td{padding:7px 14px;border-bottom:1px solid var(--border);color:var(--text);white-space:nowrap}
 .sql-table tr:last-child td{border-bottom:none}
 .sql-table tr:hover td{background:var(--surface3)}
 
-/* ── Trace panel ─────────────────────────────────────────────── */
+/* ── Trace ───────────────────────────────────────────────────────────────── */
 .trace-wrap{display:flex;flex-direction:column;gap:2px}
-.trace-evt{
-  display:flex;align-items:flex-start;gap:10px;
-  padding:8px 12px;border-radius:var(--r);
-  background:var(--surface);border:1px solid transparent;
-  transition:border-color .1s;font-size:12px;
-}
+.trace-evt{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:var(--r);background:var(--surface);border:1px solid transparent;transition:border-color .1s;font-size:12px}
 .trace-evt:hover{border-color:var(--border2)}
 .trace-ts{color:var(--text3);font-size:10px;white-space:nowrap;padding-top:2px;min-width:85px}
-.trace-node{
-  padding:1px 7px;border-radius:4px;font-size:10px;font-weight:500;
-  white-space:nowrap;min-width:80px;text-align:center;
-}
+.trace-node{padding:1px 7px;border-radius:4px;font-size:10px;font-weight:500;white-space:nowrap;min-width:80px;text-align:center}
 .trace-event{color:var(--text2);flex:1}
 .trace-data{color:var(--text3);font-size:11px;margin-top:2px;word-break:break-all}
-/* Node colours */
 .node-router{background:rgba(77,166,255,.15);color:#4da6ff}
 .node-retriever{background:rgba(180,120,255,.15);color:#b478ff}
 .node-planner{background:rgba(245,166,35,.12);color:#f5a623}
@@ -381,78 +337,39 @@ table.sql-table{width:100%;border-collapse:collapse;font-size:12px}
 .node-repair{background:rgba(255,77,109,.2);color:#ff4d6d}
 .node-checkpoint{background:rgba(120,220,100,.12);color:#78dc64}
 
-/* ── Optimize panel ──────────────────────────────────────────── */
-.opt-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r2);padding:24px;max-width:600px;
-}
-.opt-title{
-  font-family:var(--sans);font-weight:700;font-size:18px;margin-bottom:6px;
-}
+/* ── Optimize ────────────────────────────────────────────────────────────── */
+.opt-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);padding:24px;max-width:600px}
+.opt-title{font-family:var(--sans);font-weight:700;font-size:18px;margin-bottom:6px}
 .opt-desc{color:var(--text2);font-size:13px;margin-bottom:24px;line-height:1.6}
-.opt-run-btn{
-  padding:10px 24px;border-radius:var(--r);
-  background:var(--accent);border:none;
-  font-family:var(--sans);font-weight:700;font-size:14px;color:#000;
-  cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px;
-}
+.opt-run-btn{padding:10px 24px;border-radius:var(--r);background:var(--accent);border:none;font-family:var(--sans);font-weight:700;font-size:14px;color:#000;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px}
 .opt-run-btn:hover{background:var(--accent2)}
 .opt-run-btn:disabled{opacity:.4;cursor:not-allowed}
-.metrics-table{
-  margin-top:24px;background:var(--surface2);
-  border:1px solid var(--border2);border-radius:var(--r2);overflow:hidden;
-}
+.metrics-table{margin-top:24px;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--r2);overflow:hidden}
 .metrics-table table{width:100%;border-collapse:collapse;font-size:13px}
-.metrics-table th{
-  padding:10px 16px;text-align:left;background:var(--surface3);
-  color:var(--text2);font-size:11px;text-transform:uppercase;letter-spacing:.1em;
-  border-bottom:1px solid var(--border);
-}
+.metrics-table th{padding:10px 16px;text-align:left;background:var(--surface3);color:var(--text2);font-size:11px;text-transform:uppercase;letter-spacing:.1em;border-bottom:1px solid var(--border)}
 .metrics-table td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text)}
 .metrics-table tr:last-child td{border-bottom:none}
-.delta-pos{color:var(--accent)}
-.delta-neg{color:var(--err)}
-.delta-zero{color:var(--text3)}
+.delta-pos{color:var(--accent)}.delta-neg{color:var(--err)}.delta-zero{color:var(--text3)}
 
-/* ── Outputs panel ───────────────────────────────────────────── */
-.outputs-grid{display:grid;gap:12px}
-
-/* ── Empty state ─────────────────────────────────────────────── */
-.empty{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:60px 20px;color:var(--text3);gap:12px;
-}
+/* ── Misc ────────────────────────────────────────────────────────────────── */
+.section-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.section-title{font-family:var(--sans);font-weight:700;font-size:16px}
+.section-count{padding:3px 10px;border-radius:99px;font-size:11px;background:var(--surface2);border:1px solid var(--border2);color:var(--text3)}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;color:var(--text3);gap:12px}
 .empty-icon{font-size:40px;opacity:.4}
 .empty-text{font-size:14px}
-
-/* ── Toast ───────────────────────────────────────────────────── */
-.toast{
-  position:fixed;bottom:24px;right:24px;z-index:9999;
-  padding:12px 18px;border-radius:var(--r);
-  background:var(--surface3);border:1px solid var(--border2);
-  font-size:13px;animation:toastIn .2s ease;
-  max-width:360px;box-shadow:var(--shadow);
-}
+.toast{position:fixed;bottom:24px;right:24px;z-index:9999;padding:12px 18px;border-radius:var(--r);background:var(--surface3);border:1px solid var(--border2);font-size:13px;animation:toastIn .2s ease;max-width:360px;box-shadow:var(--shadow)}
 .toast.ok{border-color:var(--accent);color:var(--accent)}
 .toast.err{border-color:var(--err);color:var(--err)}
 @keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
-/* ── Section header ──────────────────────────────────────────── */
-.section-hd{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:20px;
-}
-.section-title{font-family:var(--sans);font-weight:700;font-size:16px}
-.section-count{
-  padding:3px 10px;border-radius:99px;font-size:11px;
-  background:var(--surface2);border:1px solid var(--border2);color:var(--text3);
-}
+/* ── cursor blink kept for potential reuse ─────────────────────────────── */
+.cursor-blink{display:none}
 </style>
 </head>
 <body>
 <div class="app">
 
-<!-- ── Header ─────────────────────────────────────────────────────────────── -->
 <header>
   <div class="logo">Retail <span>Analytics</span> Copilot</div>
   <div class="status-pill" id="statusPill">
@@ -460,35 +377,29 @@ table.sql-table{width:100%;border-collapse:collapse;font-size:12px}
     <span id="statusText">connecting…</span>
   </div>
   <nav>
-    <button class="active" onclick="switchTab('query')">Query</button>
-    <button onclick="switchTab('batch')">Batch</button>
-    <button onclick="switchTab('schema')">Schema</button>
-    <button onclick="switchTab('docs')">Docs</button>
-    <button onclick="switchTab('sql')">SQL</button>
-    <button onclick="switchTab('trace')">Trace</button>
-    <button onclick="switchTab('optimize')">Optimize</button>
+    <button class="active" onclick="switchTab('query',this)">Query</button>
+    <button onclick="switchTab('batch',this)">Batch</button>
+    <button onclick="switchTab('schema',this)">Schema</button>
+    <button onclick="switchTab('docs',this)">Docs</button>
+    <button onclick="switchTab('sql',this)">SQL</button>
+    <button onclick="switchTab('trace',this)">Trace</button>
+    <button onclick="switchTab('optimize',this)">Optimize</button>
   </nav>
 </header>
 
-<!-- ── Main ───────────────────────────────────────────────────────────────── -->
 <main>
-
-  <!-- Sidebar: sample questions -->
   <aside class="sidebar">
     <div class="sidebar-header">Sample Questions</div>
     <div class="qs-list" id="qsList">
       <div class="empty"><div class="empty-icon">⏳</div><div class="empty-text">Loading…</div></div>
     </div>
-    <button class="run-all-btn" id="runAllBtn" onclick="runBatch()" disabled>
-      ▶ Run All 6 Questions
-    </button>
+    <button class="run-all-btn" id="runAllBtn" onclick="runBatch()" disabled>▶ Run All 6 Questions</button>
   </aside>
 
-  <!-- Content -->
   <div class="content">
     <div class="tab-panels">
 
-      <!-- ── Query panel ─────────────────────────────────────────────────── -->
+      <!-- ── Query ──────────────────────────────────────────────────────── -->
       <div class="panel active" id="panel-query">
         <div class="query-box">
           <div class="query-label">Ask the Copilot</div>
@@ -512,7 +423,7 @@ table.sql-table{width:100%;border-collapse:collapse;font-size:12px}
         <div id="queryResult"></div>
       </div>
 
-      <!-- ── Batch panel ─────────────────────────────────────────────────── -->
+      <!-- ── Batch ──────────────────────────────────────────────────────── -->
       <div class="panel" id="panel-batch">
         <div class="section-hd">
           <div class="section-title">Batch Results</div>
@@ -520,22 +431,22 @@ table.sql-table{width:100%;border-collapse:collapse;font-size:12px}
         </div>
         <div class="batch-grid" id="batchGrid">
           <div class="empty"><div class="empty-icon">📊</div>
-          <div class="empty-text">Click "Run All 6 Questions" in the sidebar to start batch evaluation.</div></div>
+          <div class="empty-text">Click "Run All 6 Questions" in the sidebar.</div></div>
         </div>
       </div>
 
-      <!-- ── Schema panel ────────────────────────────────────────────────── -->
+      <!-- ── Schema ─────────────────────────────────────────────────────── -->
       <div class="panel" id="panel-schema">
         <div class="section-hd">
           <div class="section-title">Database Schema</div>
           <span class="section-count" id="schemaCount">—</span>
         </div>
         <div class="schema-grid" id="schemaGrid">
-          <div class="empty"><div class="empty-icon">🗄️</div><div class="empty-text">Loading schema…</div></div>
+          <div class="empty"><div class="empty-icon">🗄️</div><div class="empty-text">Loading…</div></div>
         </div>
       </div>
 
-      <!-- ── Docs panel ──────────────────────────────────────────────────── -->
+      <!-- ── Docs ───────────────────────────────────────────────────────── -->
       <div class="panel" id="panel-docs">
         <div class="section-hd">
           <div class="section-title">RAG Document Chunks</div>
@@ -543,11 +454,11 @@ table.sql-table{width:100%;border-collapse:collapse;font-size:12px}
         </div>
         <div class="doc-filters" id="docFilters"></div>
         <div class="chunk-grid" id="chunkGrid">
-          <div class="empty"><div class="empty-icon">📄</div><div class="empty-text">Loading chunks…</div></div>
+          <div class="empty"><div class="empty-icon">📄</div><div class="empty-text">Loading…</div></div>
         </div>
       </div>
 
-      <!-- ── SQL panel ───────────────────────────────────────────────────── -->
+      <!-- ── SQL ────────────────────────────────────────────────────────── -->
       <div class="panel" id="panel-sql">
         <div class="sql-editor-wrap">
           <div class="query-label">SQL Playground — Northwind SQLite</div>
@@ -560,29 +471,25 @@ table.sql-table{width:100%;border-collapse:collapse;font-size:12px}
         <div class="sql-results" id="sqlResults" style="display:none"></div>
       </div>
 
-      <!-- ── Trace panel ─────────────────────────────────────────────────── -->
+      <!-- ── Trace ──────────────────────────────────────────────────────── -->
       <div class="panel" id="panel-trace">
         <div class="section-hd">
           <div class="section-title">Execution Trace</div>
           <div style="display:flex;gap:8px">
             <span class="section-count" id="traceCount">—</span>
-            <button onclick="loadTrace()" style="padding:4px 12px;border-radius:var(--r);background:var(--surface2);border:1px solid var(--border2);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer;">↻ Refresh</button>
+            <button onclick="loadTrace()" style="padding:4px 12px;border-radius:var(--r);background:var(--surface2);border:1px solid var(--border2);color:var(--text2);font-family:var(--mono);font-size:12px;cursor:pointer">↻ Refresh</button>
           </div>
         </div>
         <div class="trace-wrap" id="traceWrap">
-          <div class="empty"><div class="empty-icon">🔍</div><div class="empty-text">Run a query to see the trace.</div></div>
+          <div class="empty"><div class="empty-icon">🔍</div><div class="empty-text">Run a query to see trace.</div></div>
         </div>
       </div>
 
-      <!-- ── Optimize panel ──────────────────────────────────────────────── -->
+      <!-- ── Optimize ───────────────────────────────────────────────────── -->
       <div class="panel" id="panel-optimize">
         <div class="opt-card">
           <div class="opt-title">DSPy NL→SQL Optimization</div>
-          <div class="opt-desc">
-            Run <strong>BootstrapFewShot</strong> on the NL→SQL module over 10 hand-crafted
-            Northwind training examples. Measures SQL execution success rate before and after
-            optimization. Takes ~10–20 seconds.
-          </div>
+          <div class="opt-desc">Run <strong>BootstrapFewShot</strong> on the NL→SQL module over 10 hand-crafted Northwind training examples. Takes ~10–20 seconds.</div>
           <button class="opt-run-btn" id="optRunBtn" onclick="runOptimize()">
             <span id="optBtnIcon">⚡</span>
             <span id="optBtnText">Run Optimization</span>
@@ -596,18 +503,30 @@ table.sql-table{width:100%;border-collapse:collapse;font-size:12px}
         </div>
       </div>
 
-    </div><!-- /tab-panels -->
-  </div><!-- /content -->
+    </div>
+  </div>
 </main>
-</div><!-- /app -->
+</div>
 
 <script>
-// ─── State ────────────────────────────────────────────────────────────────────
-const API = '';  // same origin — FastAPI serves frontend
-let _questions = [];
-let _activeQ = null;
-let _allChunks = [];
-let _chunkFilter = 'all';
+// ─── Constants & State ────────────────────────────────────────────────────────
+const API = '';
+let _questions = [], _activeQ = null, _allChunks = [], _chunkFilter = 'all';
+let _abortCtrl = null;  // for cancelling ongoing SSE stream
+
+// Pipeline node definitions — order matters for display
+// Each node maps to a short phrase that gets appended to the running sentence
+const NODE_PHRASES = {
+  router:       msg => msg.route ? `understood this as a <strong>${msg.route}</strong> question` : 'understood your question',
+  retriever:    msg => 'searched the policy docs',
+  planner:      msg => 'extracted dates and filters',
+  nl2sql:       msg => msg.sql_preview ? 'wrote a SQL query' : 'wrote a SQL query',
+  sql_executor: msg => msg.row_count !== undefined ? `fetched ${msg.row_count} row${msg.row_count!==1?'s':''}` : 'queried the database',
+  synthesizer:  _   => 'synthesized the answer',
+  validator:    _   => 'validated the output',
+  repair:       _   => 'repaired the answer',
+  checkpoint:   _   => 'computed confidence',
+};
 
 // ─── Init ─────────────────────────────────────────────────────────────────────
 async function init() {
@@ -619,7 +538,7 @@ async function init() {
   loadOutputs();
 }
 
-// ─── Health polling ───────────────────────────────────────────────────────────
+// ─── Health ───────────────────────────────────────────────────────────────────
 async function pollHealth() {
   const dot = document.getElementById('statusDot');
   const txt = document.getElementById('statusText');
@@ -628,7 +547,7 @@ async function pollHealth() {
     const d = await r.json();
     if (d.initialized) {
       dot.className = 'dot ok';
-      txt.textContent = 'agent ready';
+      txt.textContent = `agent ready · ${d.mode || 'local'}`;
       document.getElementById('runAllBtn').disabled = false;
     } else if (d.error) {
       dot.className = 'dot err';
@@ -646,21 +565,21 @@ async function pollHealth() {
 }
 
 // ─── Tab switching ────────────────────────────────────────────────────────────
-function switchTab(name) {
+function switchTab(name, btn) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById(`panel-${name}`).classList.add('active');
-  event.currentTarget.classList.add('active');
+  if (btn) btn.classList.add('active');
 }
 
-// ─── Sidebar questions ────────────────────────────────────────────────────────
+// ─── Questions ────────────────────────────────────────────────────────────────
 async function loadQuestions() {
   try {
     const r = await fetch(`${API}/api/questions`);
     const d = await r.json();
     _questions = d.questions || [];
     renderQuestions();
-  } catch { }
+  } catch {}
 }
 
 function inferRoute(q) {
@@ -680,7 +599,7 @@ function renderQuestions() {
     const route = inferRoute(q);
     return `<div class="q-item" id="qi-${i}" onclick="selectQuestion(${i})">
       <div class="q-item-id">${q.id}</div>
-      <div class="q-item-text">${q.question.substring(0, 90)}${q.question.length > 90 ? '…' : ''}</div>
+      <div class="q-item-text">${q.question.substring(0,90)}${q.question.length>90?'…':''}</div>
       <div><span class="q-badge ${route}">${route}</span>
       <span class="q-badge">${q.format_hint}</span></div>
     </div>`;
@@ -689,121 +608,473 @@ function renderQuestions() {
 
 function selectQuestion(i) {
   _activeQ = _questions[i];
-  document.querySelectorAll('.q-item').forEach((el, j) => {
-    el.classList.toggle('active', j === i);
-  });
-  const inp = document.getElementById('queryInput');
+  document.querySelectorAll('.q-item').forEach((el, j) => el.classList.toggle('active', j === i));
+  document.getElementById('queryInput').value = _activeQ.question;
   const fmt = document.getElementById('fmtSelect');
-  inp.value = _activeQ.question;
-  // Set format hint in select
   const opts = Array.from(fmt.options).map(o => o.value);
   const match = opts.findIndex(o => o === _activeQ.format_hint);
-  fmt.selectedIndex = match >= 0 ? match : 0;
-  if (match < 0) {
+  if (match >= 0) {
+    fmt.selectedIndex = match;
+  } else {
     const opt = document.createElement('option');
     opt.value = _activeQ.format_hint;
     opt.textContent = _activeQ.format_hint;
     opt.selected = true;
     fmt.appendChild(opt);
   }
-  // Switch to query tab
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  document.getElementById('panel-query').classList.add('active');
-  document.querySelector('nav button').classList.add('active');
+  switchTab('query', document.querySelector('nav button'));
 }
 
-// ─── Single Query ─────────────────────────────────────────────────────────────
+// ─── STREAMING QUERY ──────────────────────────────────────────────────────────
+
+// Build narrative sentence state
+let _segments   = [];   // [{id, text, done}]
+let _spinnerOn  = false;
+
+function _initNarrative() {
+  _segments = [];
+  _spinnerOn = false;
+  const bar = document.getElementById('narrativeBar');
+  if (bar) bar.querySelector('.narrative-sentence').innerHTML = '<span class="ns-spinner"></span>';
+}
+
+function _addSegment(nodeId, text) {
+  // mark previous segment done
+  _segments.forEach(s => { s.done = true; });
+  _segments.push({id: nodeId, text, done: false});
+  _renderNarrative();
+}
+
+function _finalizeNarrative(answerDisplay) {
+  _segments.forEach(s => { s.done = true; });
+  _renderNarrative(answerDisplay);
+}
+
+function _renderNarrative(answerDisplay) {
+  const container = document.getElementById('narrativeBar');
+  if (!container) return;
+  const el = container.querySelector('.narrative-sentence');
+
+  let html = '';
+  _segments.forEach((seg, i) => {
+    if (i > 0) html += '<span class="ns-arrow">→</span>';
+    html += `<span class="ns-seg ${seg.done ? 'done' : 'active'}" id="nsseg-${seg.id}">${seg.text}</span>`;
+  });
+
+  if (answerDisplay !== undefined) {
+    // replace spinner with highlighted answer
+    html += `<span class="ns-arrow">→</span><span class="ns-answer">${answerDisplay}</span><span class="ns-done-dot"></span>`;
+  } else if (_segments.length > 0) {
+    html += '<span class="ns-spinner"></span>';
+  }
+
+  el.innerHTML = html;
+}
+
 async function sendQuery() {
   const question = document.getElementById('queryInput').value.trim();
   const format_hint = document.getElementById('fmtSelect').value;
   if (!question) { toast('Enter a question first', 'err'); return; }
 
+  if (_abortCtrl) _abortCtrl.abort();
+  _abortCtrl = new AbortController();
+
   const btn = document.getElementById('sendBtn');
-  btn.disabled = true; btn.classList.add('loading');
+  btn.disabled = true;
+  btn.classList.add('loading');
+
+  const resultEl = document.getElementById('queryResult');
+  resultEl.innerHTML = `<div class="narrative-bar" id="narrativeBar"><div class="narrative-sentence"><span class="ns-spinner"></span></div></div>`;
+  _initNarrative();
 
   try {
-    const r = await fetch(`${API}/api/query`, {
+    const resp = await fetch(`${API}/api/query/stream`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({question, format_hint, id: _activeQ?.id || 'custom'}),
+      signal: _abortCtrl.signal,
     });
-    const d = await r.json();
-    if (!r.ok) { toast(d.detail || 'Error', 'err'); return; }
-    renderResult(d);
-    loadTrace();
-  } catch (e) { toast(e.message, 'err'); }
-  finally { btn.disabled = false; btn.classList.remove('loading'); }
+
+    if (!resp.ok) {
+      const err = await resp.json();
+      toast(err.detail || 'Error from server', 'err');
+      resultEl.innerHTML = '';
+      return;
+    }
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let _lastResult = null;
+
+    while (true) {
+      const {done, value} = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, {stream: true});
+      const lines = buffer.split('\n');
+      buffer = lines.pop();
+
+      for (const line of lines) {
+        if (!line.startsWith('data:')) continue;
+        const raw = line.slice(5).trim();
+        if (!raw) continue;
+        let msg;
+        try { msg = JSON.parse(raw); } catch { continue; }
+
+        if (msg.type === 'token') {
+          // ignore raw token stream — narrative handles it
+        } else if (msg.type === 'progress') {
+          const phraseFn = NODE_PHRASES[msg.node];
+          if (phraseFn) _addSegment(msg.node, phraseFn(msg));
+        } else if (msg.type === 'result') {
+          _lastResult = msg;
+          // build short answer label
+          const ans = msg.final_answer;
+          let label = '';
+          if (ans === null || ans === undefined) {
+            label = 'no result';
+          } else if (typeof ans === 'number') {
+            label = Number.isInteger(ans) ? ans.toLocaleString() : ans.toFixed(2);
+          } else if (Array.isArray(ans)) {
+            label = `${ans.length} item${ans.length!==1?'s':''}`;
+          } else if (typeof ans === 'object') {
+            const keys = Object.keys(ans);
+            label = keys.length <= 2 ? Object.values(ans).join(' / ') : `${keys.length} fields`;
+          } else {
+            const s = String(ans);
+            label = s.length > 60 ? s.slice(0, 57) + '…' : s;
+          }
+          _finalizeNarrative(escHtml(label));
+          // show result card below after short pause
+          setTimeout(() => {
+            const card = document.createElement('div');
+            card.innerHTML = buildResultCard(msg, '');
+            resultEl.appendChild(card);
+          }, 350);
+          loadTrace();
+        } else if (msg.type === 'error') {
+          toast('Agent error: ' + msg.message, 'err');
+          _finalizeNarrative('⚠ error');
+        }
+      }
+    }
+  } catch (e) {
+    if (e.name !== 'AbortError') toast(e.message, 'err');
+  } finally {
+    btn.disabled = false;
+    btn.classList.remove('loading');
+  }
 }
 
-function renderResult(d) {
+// ─── Result Card ──────────────────────────────────────────────────────────────
+function buildResultCard(d, streamedText) {
   const route = d.route || 'hybrid';
   const conf = Math.round((d.confidence || 0) * 100);
-  const ansStr = JSON.stringify(d.final_answer, null, 2);
-  const sqlStr = (d.sql || '').trim();
+  const confClass = conf >= 70 ? 'high' : conf >= 40 ? 'mid' : 'low';
+
+  const repairBadge = d.repair_count > 0
+    ? `<span class="repair-badge">🔧 repaired ${d.repair_count}×</span>` : '';
+
   const cites = (d.citations || []).map(c => {
     const isDoc = c.includes('::');
     return `<span class="cite-tag ${isDoc ? 'doc' : 'db'}">${c}</span>`;
   }).join('');
-  const repairBadge = d.repair_count > 0
-    ? `<span class="repair-badge">🔧 repaired ${d.repair_count}×</span>` : '';
 
-  document.getElementById('queryResult').innerHTML = `
+  const sqlStr = (d.sql || '').trim();
+  const sqlSection = sqlStr ? `
+    <div class="r-section">
+      <div class="r-label"><span class="r-label-icon">🗄️</span> SQL Executed</div>
+      <div class="sql-display">
+        <button class="copy-sql-btn" onclick="copySql(this)">Copy</button>
+        <pre>${escHtml(formatSQL(sqlStr))}</pre>
+      </div>
+    </div>` : '';
+
+  const explText = (streamedText && streamedText.trim()) ? streamedText.trim() : d.explanation;
+  const explSection = explText ? `
+    <div class="r-section">
+      <div class="r-label"><span class="r-label-icon">💡</span> Explanation</div>
+      <div class="expl-text">${escHtml(explText)}</div>
+    </div>` : '';
+
+  const citesSection = cites ? `
+    <div class="r-section">
+      <div class="r-label"><span class="r-label-icon">📎</span> Citations</div>
+      <div class="citations">${cites}</div>
+    </div>` : '';
+
+  return `
     <div class="result-card">
       <div class="result-header">
         <span class="result-id">${d.id}</span>
         <span class="result-route q-badge ${route}">${route}</span>
         ${repairBadge}
-        <span class="result-conf">
-          ${conf}%
-          <span class="conf-bar"><div class="conf-fill" style="width:${conf}%"></div></span>
-        </span>
+        <div class="result-conf">
+          <span class="conf-num ${confClass}">${conf}%</span>
+          <div class="conf-bar"><div class="conf-fill ${confClass}" style="width:${conf}%"></div></div>
+        </div>
       </div>
       <div class="result-body">
         <div class="r-section">
-          <div class="r-label">Final Answer</div>
-          <div class="answer-block">${ansStr}</div>
+          <div class="r-label"><span class="r-label-icon">✨</span> Answer</div>
+          <div class="answer-wrap">${renderAnswer(d.final_answer, d.route)}</div>
         </div>
-        ${sqlStr ? `<div class="r-section">
-          <div class="r-label">SQL Executed</div>
-          <div class="sql-block">${escHtml(sqlStr)}</div>
-        </div>` : ''}
-        ${d.explanation ? `<div class="r-section">
-          <div class="r-label">Explanation</div>
-          <div class="expl-text">${escHtml(d.explanation)}</div>
-        </div>` : ''}
-        ${cites ? `<div class="r-section">
-          <div class="r-label">Citations</div>
-          <div class="citations">${cites}</div>
-        </div>` : ''}
+        ${sqlSection}
+        ${explSection}
+        ${citesSection}
       </div>
     </div>`;
 }
 
-// ─── Batch ────────────────────────────────────────────────────────────────────
-async function runBatch() {
-  const btn = document.getElementById('runAllBtn');
-  btn.disabled = true; btn.textContent = '⏳ Running…';
+// ─── Smart Answer Renderer ────────────────────────────────────────────────────
+function renderAnswer(answer, route) {
+  if (answer === null || answer === undefined) {
+    return '<div class="answer-text" style="color:var(--text3)">No answer returned.</div>';
+  }
 
+  // List of objects → table
+  if (Array.isArray(answer) && answer.length > 0 && typeof answer[0] === 'object') {
+    return renderAnswerTable(answer);
+  }
+
+  // Single object → key-value grid
+  if (typeof answer === 'object' && !Array.isArray(answer)) {
+    return renderAnswerObject(answer);
+  }
+
+  // Number (int or float)
+  if (typeof answer === 'number') {
+    const fmt = Number.isInteger(answer) ? answer.toLocaleString() : answer.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+    return `<div class="answer-scalar">${fmt}</div>`;
+  }
+
+  // Simple array of primitives
+  if (Array.isArray(answer)) {
+    const items = answer.map(v => `<div class="answer-text" style="padding:6px 14px">${escHtml(String(v))}</div>`).join('');
+    return `<div style="display:flex;flex-direction:column;gap:4px">${items}</div>`;
+  }
+
+  // String — check if it looks like a number
+  const num = parseFloat(String(answer).replace(/,/g, ''));
+  if (!isNaN(num) && String(answer).trim() !== '') {
+    const fmt = Number.isInteger(num) ? num.toLocaleString() : num.toLocaleString(undefined, {minimumFractionDigits:2,maximumFractionDigits:2});
+    return `<div class="answer-scalar">${fmt}</div>`;
+  }
+
+  // Try to parse as JSON
   try {
-    const r = await fetch(`${API}/api/batch`, {method: 'POST'});
-    const d = await r.json();
-    if (!r.ok) { toast(d.detail || 'Batch error', 'err'); return; }
-    renderBatch(d.results || []);
-    switchTabById('batch');
-    loadTrace();
-    toast(`Batch complete — ${d.count} results`, 'ok');
-  } catch (e) { toast(e.message, 'err'); }
-  finally { btn.disabled = false; btn.textContent = '▶ Run All 6 Questions'; }
+    const parsed = JSON.parse(String(answer));
+    if (Array.isArray(parsed) && parsed.length > 0 && typeof parsed[0] === 'object') return renderAnswerTable(parsed);
+    if (typeof parsed === 'object') return renderAnswerObject(parsed);
+  } catch {}
+
+  // Plain string
+  return `<div class="answer-text">${escHtml(String(answer))}</div>`;
 }
 
-function switchTabById(name) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('nav button').forEach((b, i) => {
-    const tabs = ['query','batch','schema','docs','sql','trace','optimize'];
-    b.classList.toggle('active', tabs[i] === name);
+function renderAnswerTable(rows) {
+  if (!rows.length) return '<div class="answer-text" style="color:var(--text3)">No data.</div>';
+  const keys = Object.keys(rows[0]);
+
+  // Detect numeric keys for right-aligned styling
+  const numericKeys = new Set(keys.filter(k => {
+    return rows.some(r => typeof r[k] === 'number' || (!isNaN(parseFloat(r[k])) && r[k] !== ''));
+  }));
+
+  const ths = keys.map(k => `<th>${escHtml(k)}</th>`).join('');
+  const trs = rows.map((row, idx) => {
+    const tds = keys.map(k => {
+      const v = row[k];
+      const isNum = numericKeys.has(k);
+      const display = isNum && typeof v === 'number'
+        ? v.toLocaleString(undefined, {minimumFractionDigits: Number.isInteger(v) ? 0 : 2, maximumFractionDigits: 2})
+        : escHtml(String(v ?? ''));
+      return `<td class="${isNum ? 'num-cell' : ''}">${display}</td>`;
+    }).join('');
+    return `<tr><td class="rank-cell">${idx+1}</td>${tds}</tr>`;
+  }).join('');
+
+  return `
+    <div class="answer-table-wrap">
+      <table class="answer-table">
+        <thead><tr><th>#</th>${ths}</tr></thead>
+        <tbody>${trs}</tbody>
+      </table>
+    </div>`;
+}
+
+function renderAnswerObject(obj) {
+  const items = Object.entries(obj).map(([k, v]) => {
+    const isNum = typeof v === 'number';
+    const display = isNum
+      ? v.toLocaleString(undefined, {minimumFractionDigits: Number.isInteger(v) ? 0 : 2, maximumFractionDigits: 2})
+      : escHtml(String(v ?? ''));
+    return `<div class="answer-obj-item">
+      <div class="answer-obj-key">${escHtml(k)}</div>
+      <div class="answer-obj-val">${display}</div>
+    </div>`;
+  }).join('');
+  return `<div class="answer-obj-grid">${items}</div>`;
+}
+
+// ─── SQL Formatter (basic) ────────────────────────────────────────────────────
+function formatSQL(sql) {
+  return sql
+    .replace(/\b(SELECT|FROM|JOIN|LEFT JOIN|INNER JOIN|WHERE|GROUP BY|ORDER BY|HAVING|LIMIT|ON|AND|OR|AS|ROUND|SUM|COUNT|AVG|MAX|MIN|DISTINCT)\b/gi,
+      m => '\n' + m.toUpperCase())
+    .replace(/^\n/, '')
+    .trim();
+}
+
+function copySql(btn) {
+  const pre = btn.nextElementSibling;
+  navigator.clipboard.writeText(pre.textContent).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 1500);
   });
-  document.getElementById(`panel-${name}`).classList.add('active');
+}
+
+// ─── Batch (sequential streaming) ────────────────────────────────────────────
+async function runBatch() {
+  if (!_questions.length) { toast('No questions loaded', 'err'); return; }
+  const btn = document.getElementById('runAllBtn');
+  btn.disabled = true;
+
+  // Switch to Query tab so the user sees the stream on the right
+  const queryNavBtn = [...document.querySelectorAll('nav button')].find(b => b.textContent.trim() === 'Query') || document.querySelector('nav button');
+  switchTab('query', queryNavBtn);
+
+  const total = _questions.length;
+  for (let i = 0; i < total; i++) {
+    btn.textContent = `⏳ Running ${i + 1}/${total}…`;
+
+    // Highlight current question in sidebar
+    document.querySelectorAll('.q-item').forEach((el, j) => el.classList.toggle('active', j === i));
+    _activeQ = _questions[i];
+
+    // Pre-fill the input box
+    document.getElementById('queryInput').value = _activeQ.question;
+    const fmt = document.getElementById('fmtSelect');
+    const opts = Array.from(fmt.options).map(o => o.value);
+    const match = opts.findIndex(o => o === _activeQ.format_hint);
+    if (match >= 0) { fmt.selectedIndex = match; }
+
+    // Wait for this question's stream to finish before moving to the next
+    await sendQueryAndWait();
+
+    // Small pause between questions so the user can see each result
+    await new Promise(res => setTimeout(res, 600));
+  }
+
+  loadTrace();
+  toast(`All ${total} questions complete`, 'ok');
+  btn.disabled = false;
+  btn.textContent = '▶ Run All 6 Questions';
+}
+
+// Like sendQuery() but returns a Promise that resolves when the stream ends
+async function sendQueryAndWait() {
+  const question = document.getElementById('queryInput').value.trim();
+  const format_hint = document.getElementById('fmtSelect').value;
+  if (!question) return;
+
+  if (_abortCtrl) _abortCtrl.abort();
+  _abortCtrl = new AbortController();
+
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true;
+  btn.classList.add('loading');
+
+  const resultEl = document.getElementById('queryResult');
+
+  // Create a container block for this question so previous ones stay visible
+  const questionBlock = document.createElement('div');
+  questionBlock.style.cssText = 'margin-bottom:28px;border-top:1px solid var(--border);padding-top:20px';
+  // Remove border from the very first block
+  if (!resultEl.children.length) questionBlock.style.borderTop = 'none';
+
+  // Question label
+  const qLabel = document.createElement('div');
+  qLabel.style.cssText = 'font-family:var(--sans);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text3);margin-bottom:10px';
+  qLabel.textContent = `${_activeQ?.id || 'custom'} · ${document.getElementById('queryInput').value.trim().substring(0, 80)}`;
+  questionBlock.appendChild(qLabel);
+
+  // Narrative bar for this question
+  const narrativeBar = document.createElement('div');
+  narrativeBar.id = 'narrativeBar';
+  narrativeBar.className = 'narrative-bar';
+  narrativeBar.innerHTML = '<div class="narrative-sentence"><span class="ns-spinner"></span></div>';
+  questionBlock.appendChild(narrativeBar);
+
+  resultEl.appendChild(questionBlock);
+  _initNarrative();
+
+  // Scroll to the new question block
+  questionBlock.scrollIntoView({behavior: 'smooth', block: 'start'});
+
+  try {
+    const resp = await fetch(`${API}/api/query/stream`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({question, format_hint, id: _activeQ?.id || 'custom'}),
+      signal: _abortCtrl.signal,
+    });
+
+    if (!resp.ok) {
+      const err = await resp.json();
+      toast(err.detail || 'Error from server', 'err');
+      questionBlock.remove();
+      return;
+    }
+
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    while (true) {
+      const {done, value} = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, {stream: true});
+      const lines = buffer.split('\n');
+      buffer = lines.pop();
+
+      for (const line of lines) {
+        if (!line.startsWith('data:')) continue;
+        const raw = line.slice(5).trim();
+        if (!raw) continue;
+        let msg;
+        try { msg = JSON.parse(raw); } catch { continue; }
+
+        if (msg.type === 'progress') {
+          const phraseFn = NODE_PHRASES[msg.node];
+          if (phraseFn) _addSegment(msg.node, phraseFn(msg));
+        } else if (msg.type === 'result') {
+          const ans = msg.final_answer;
+          let label = '';
+          if (ans === null || ans === undefined) { label = 'no result'; }
+          else if (typeof ans === 'number') { label = Number.isInteger(ans) ? ans.toLocaleString() : ans.toFixed(2); }
+          else if (Array.isArray(ans)) { label = `${ans.length} item${ans.length!==1?'s':''}`; }
+          else if (typeof ans === 'object') { const keys = Object.keys(ans); label = keys.length <= 2 ? Object.values(ans).join(' / ') : `${keys.length} fields`; }
+          else { const s = String(ans); label = s.length > 60 ? s.slice(0, 57) + '…' : s; }
+          _finalizeNarrative(escHtml(label));
+          await new Promise(res => setTimeout(res, 350));
+          const card = document.createElement('div');
+          card.innerHTML = buildResultCard(msg, '');
+          questionBlock.appendChild(card);
+        } else if (msg.type === 'error') {
+          toast('Agent error: ' + msg.message, 'err');
+          _finalizeNarrative('⚠ error');
+        }
+      }
+    }
+  } catch (e) {
+    if (e.name !== 'AbortError') toast(e.message, 'err');
+  } finally {
+    btn.disabled = false;
+    btn.classList.remove('loading');
+  }
 }
 
 async function loadOutputs() {
@@ -811,7 +1082,7 @@ async function loadOutputs() {
     const r = await fetch(`${API}/api/outputs`);
     const d = await r.json();
     if (d.outputs && d.outputs.length) renderBatch(d.outputs);
-  } catch { }
+  } catch {}
 }
 
 function renderBatch(results) {
@@ -824,14 +1095,14 @@ function renderBatch(results) {
   grid.innerHTML = results.map(r => {
     const conf = Math.round((r.confidence || 0) * 100);
     const ans = JSON.stringify(r.final_answer);
-    const route = r.route || inferRoute({question: r.id, format_hint: ''});
+    const route = r.route || 'hybrid';
     return `<div class="batch-card">
       <div class="batch-card-head">
         <span class="batch-card-id">${r.id}</span>
-        <span class="q-badge ${route}">${route || '—'}</span>
+        <span class="q-badge ${route}">${route}</span>
       </div>
       <div class="batch-card-body">
-        <div class="batch-answer">${ans && ans !== 'null' ? ans.substring(0, 120) : '—'}</div>
+        <div class="batch-answer">${ans && ans !== 'null' ? ans.substring(0,120) : '—'}</div>
         <div class="mini-conf">
           <span>${conf}% conf</span>
           <div class="mini-bar"><div class="mini-fill" style="width:${conf}%"></div></div>
@@ -856,16 +1127,15 @@ async function loadSchema() {
     grid.innerHTML = sorted.map((t, i) => {
       const info = d.tables[t];
       const cols = info.columns || [];
-      const rows = cols.map(c => `
-        <tr>
-          <td>${c.name}${c.pk ? '<span class="pk-badge">PK</span>' : ''}</td>
-          <td><span class="type-badge">${c.type || '—'}</span></td>
-          <td>${c.notnull ? '✓' : ''}</td>
-          <td>${c.dflt_value || ''}</td>
-        </tr>`).join('');
+      const rows = cols.map(c => `<tr>
+        <td>${c.name}${c.pk ? '<span class="pk-badge">PK</span>' : ''}</td>
+        <td><span class="type-badge">${c.type||'—'}</span></td>
+        <td>${c.notnull ? '✓' : ''}</td>
+        <td>${c.dflt_value || ''}</td>
+      </tr>`).join('');
       const open = i < 5 ? 'open' : '';
       return `<div class="table-card ${open}" id="tc-${i}">
-        <div class="table-name" onclick="toggleTable(${i})">
+        <div class="table-name" onclick="document.getElementById('tc-${i}').classList.toggle('open')">
           <span>"${t}" <span style="color:var(--text3);font-size:11px;font-weight:400">(${cols.length} cols)</span></span>
           <span class="arrow">▶</span>
         </div>
@@ -875,11 +1145,7 @@ async function loadSchema() {
         </table>
       </div>`;
     }).join('');
-  } catch { }
-}
-
-function toggleTable(i) {
-  document.getElementById(`tc-${i}`).classList.toggle('open');
+  } catch {}
 }
 
 // ─── Docs ─────────────────────────────────────────────────────────────────────
@@ -891,13 +1157,13 @@ async function loadDocs() {
     document.getElementById('docsCount').textContent = `${_allChunks.length} chunks`;
     renderDocFilters();
     renderChunks();
-  } catch { }
+  } catch {}
 }
 
 function renderDocFilters() {
   const sources = ['all', ...new Set(_allChunks.map(c => c.source))];
   document.getElementById('docFilters').innerHTML = sources.map(s =>
-    `<button class="doc-filter ${s === 'all' ? 'active' : ''}" onclick="filterDocs('${s}',this)">${s === 'all' ? 'All' : s.replace(/_/g,' ')}</button>`
+    `<button class="doc-filter ${s==='all'?'active':''}" onclick="filterDocs('${s}',this)">${s==='all'?'All':s.replace(/_/g,' ')}</button>`
   ).join('');
 }
 
@@ -933,9 +1199,8 @@ async function runSQL() {
   btn.disabled = true;
   try {
     const r = await fetch(`${API}/api/sql`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({sql}),
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({sql}),
     });
     const d = await r.json();
     const el = document.getElementById('sqlResults');
@@ -944,10 +1209,9 @@ async function runSQL() {
       el.innerHTML = `<div class="sql-result-head" style="color:var(--err)">Error: ${escHtml(d.error || d.detail)}</div>`;
       return;
     }
-    const cols = d.columns || [];
-    const rows = d.rows || [];
+    const cols = d.columns || [], rows = d.rows || [];
     const ths = cols.map(c => `<th>${escHtml(c)}</th>`).join('');
-    const trs = rows.map(row => `<tr>${row.map(v => `<td>${escHtml(String(v ?? ''))}</td>`).join('')}</tr>`).join('');
+    const trs = rows.map(row => `<tr>${row.map(v => `<td>${escHtml(String(v??''))}</td>`).join('')}</tr>`).join('');
     el.innerHTML = `
       <div class="sql-result-head">
         <span>${rows.length} rows returned</span>
@@ -978,7 +1242,7 @@ async function loadTrace() {
     wrap.innerHTML = [...events].reverse().map(e => {
       const node = e.node || '';
       const ts = (e.ts || '').split('T')[1]?.split('.')[0] || '';
-      const dataStr = Object.keys(e.data || {}).length
+      const dataStr = Object.keys(e.data||{}).length
         ? Object.entries(e.data).slice(0,4).map(([k,v]) => `${k}: ${JSON.stringify(v).substring(0,60)}`).join(' · ')
         : '';
       return `<div class="trace-evt">
@@ -990,7 +1254,7 @@ async function loadTrace() {
         </div>
       </div>`;
     }).join('');
-  } catch { }
+  } catch {}
 }
 
 // ─── Optimize ─────────────────────────────────────────────────────────────────
@@ -1024,7 +1288,7 @@ function escHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function toast(msg, type = 'ok') {
+function toast(msg, type='ok') {
   const t = document.createElement('div');
   t.className = `toast ${type}`;
   t.textContent = msg;
@@ -1032,12 +1296,11 @@ function toast(msg, type = 'ok') {
   setTimeout(() => t.remove(), 3500);
 }
 
-// Enter to submit in query box
+// Ctrl+Enter to submit
 document.getElementById('queryInput').addEventListener('keydown', e => {
   if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) sendQuery();
 });
 
-// ─── Boot ─────────────────────────────────────────────────────────────────────
 init();
 </script>
 </body>
