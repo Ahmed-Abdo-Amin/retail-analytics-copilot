@@ -127,12 +127,6 @@ Deterministic formula combining:
 
 ## Local Setup Instructions
 
-### 1. Clone / unzip the project
-
-```bash
-cd retail-analytics-copilot
-```
-
 ### (Optional) Prettier shell prompt
 
 For a more readable command line during setup:
@@ -140,7 +134,12 @@ For a more readable command line during setup:
 ```bash
 export PS1="\[\033[01;32m\]\u@\h:\w\n\[\033[00m\]\$ "
 ```
------------------------------
+
+### 1. Clone / unzip the project
+
+```bash
+cd retail-analytics-copilot
+```
 
 ### 2. Install dependencies
 
@@ -175,6 +174,108 @@ cp .env.example .env
 
 ---
 
+## 🖥️ تشغيل API Server والـ UI
+
+الـ `api_server.py` هو الطريقة الرئيسية لتشغيل الكوبايلوت — يشغّل FastAPI على المنفذ 8000 ويخدم الـ UI تلقائياً من نفس العنوان.
+
+### الخطوة 1: اضبط `.env` أولاً
+
+اختر وضع التشغيل في ملف `.env`:
+
+```env
+# ─── الوضع المحلي (Ollama على جهازك) ───────────────────────
+LOCAL_MODELS=True
+OLLAMA_MODEL=phi3.5:3.8b-mini-instruct-q4_K_M
+
+# ─── أو وضع Colab + Ngrok ──────────────────────────────────
+# LOCAL_MODELS=False
+# NGROK_ROUTER_URL=https://xxxx.ngrok-free.app
+# NGROK_NL2SQL_URL=https://yyyy.ngrok-free.app
+# NGROK_SYNTHESIS_URL=https://zzzz.ngrok-free.app
+# NGROK_PLANNER_URL=https://wwww.ngrok-free.app
+```
+
+> لاستخدام وضع Colab، راجع `colab_notebooks/README_NGROK.md` أولاً.
+
+### الخطوة 2: شغّل API Server
+
+```bash
+python api_server.py
+```
+
+ستظهر هذه الرسالة عند النجاح:
+
+```
+============================================================
+Retail Analytics Copilot — Startup
+============================================================
+▶ Mode: LOCAL (Ollama)       ← أو REMOTE (Ngrok / Google Colab)
+✓ All dependencies available
+✓ Database found (...)
+✓ All 4 doc files present
+✓ DSPy configured with Ollama → phi3.5:3.8b-mini-instruct-q4_K_M
+============================================================
+✓ Startup complete
+============================================================
+INFO:     Uvicorn running on http://0.0.0.0:8000
+```
+
+### الخطوة 3: افتح الـ UI
+
+بعد ظهور رسالة `Uvicorn running`، افتح المتصفح على:
+
+```
+http://localhost:8000
+```
+
+الـ UI يعمل بالطريقتين (`LOCAL_MODELS=True` أو `False`) بدون أي تغيير.
+
+### الـ API Endpoints المتاحة
+
+| Endpoint | Method | الوصف |
+|---|---|---|
+| `/` | GET | الـ UI (frontend/index.html) |
+| `/api/health` | GET | حالة الخادم والوضع الحالي |
+| `/api/query` | POST | سؤال واحد ← إجابة JSON |
+| `/api/batch` | POST | تشغيل batch كامل |
+| `/api/questions` | GET | أسئلة جاهزة للاختبار |
+| `/api/schema` | GET | schema قاعدة البيانات |
+| `/api/docs` | GET | محتوى مستندات RAG |
+| `/api/outputs` | GET | نتائج آخر batch |
+| `/api/trace` | GET | آخر 200 trace event |
+| `/api/sql` | POST | تنفيذ SQL مباشر |
+| `/api/optimize` | GET | تشغيل DSPy optimization |
+| `/api/openapi` | GET | توثيق OpenAPI التفاعلي |
+
+### مثال: استدعاء API مباشرة
+
+```bash
+curl -X POST http://localhost:8000/api/query \
+  -H "Content-Type: application/json" \
+  -d '{
+    "question": "Top 3 products by total revenue?",
+    "format_hint": "list[{product:str, revenue:float}]"
+  }'
+```
+
+### فحص الوضع الحالي
+
+```bash
+curl http://localhost:8000/api/health
+```
+
+```json
+{
+  "status": "ok",
+  "initialized": true,
+  "mode": "local"
+}
+```
+
+> `mode` تكون `"local"` أو `"remote_ngrok"` حسب `LOCAL_MODELS` في `.env`
+
+---
+
 ## Execution Examples
 
 ### Run full evaluation batch
@@ -186,8 +287,6 @@ python run_agent_hybrid.py \
 ```
 
 ### Run a single question
-
-
 
 ```bash
 python run_agent_hybrid.py \

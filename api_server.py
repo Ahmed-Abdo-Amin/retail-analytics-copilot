@@ -1,4 +1,3 @@
-import os
 """
 api_server.py — FastAPI REST server for the Retail Analytics Copilot.
 
@@ -18,6 +17,7 @@ Endpoints:
 from __future__ import annotations
 
 import json
+import os
 import sys
 import threading
 from pathlib import Path
